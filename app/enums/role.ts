@@ -1,22 +1,22 @@
-export const RestaurantUserRole = {
+export const Role = {
   Admin: 1,
   User: 2,
 } as const
 
-export type RestaurantUserRoleId = (typeof RestaurantUserRole)[keyof typeof RestaurantUserRole]
+export type RoleId = (typeof Role)[keyof typeof Role]
 
-export const RestaurantUserRoleText = {
-  [RestaurantUserRole.Admin]: 'Admin',
-  [RestaurantUserRole.User]: 'User',
+export const RoleText = {
+  [Role.Admin]: 'Admin',
+  [Role.User]: 'User',
 } as const
 
 export const rolesDbValues = [
   {
-    id: RestaurantUserRole.Admin,
-    name: RestaurantUserRoleText[RestaurantUserRole.Admin],
+    id: Role.Admin,
+    name: RoleText[Role.Admin],
   },
   {
-    id: RestaurantUserRole.User,
-    name: RestaurantUserRoleText[RestaurantUserRole.User],
+    id: Role.User,
+    name: RoleText[Role.User],
   },
 ]
