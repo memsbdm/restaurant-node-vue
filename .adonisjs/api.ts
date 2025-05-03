@@ -34,6 +34,13 @@ export interface ApiDefinition {
 const routes = [
   {
     params: [],
+    name: 'home.render',
+    path: '/',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
+    params: [],
     name: 'auth.login.render',
     path: '/auth/login',
     method: ["GET","HEAD"],

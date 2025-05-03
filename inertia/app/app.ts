@@ -8,7 +8,8 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import { TuyauPlugin } from '@tuyau/inertia/vue'
 import { tuyau } from '../core/providers/tuyau'
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@tuyau/inertia/vue'
+import AppLayout from '~/layouts/AppLayout.vue'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -17,11 +18,14 @@ createInertiaApp({
 
   title: (title) => `${title} - ${appName}`,
 
-  resolve: (name) => {
-    return resolvePageComponent(
+  resolve: async (name) => {
+    const page = await resolvePageComponent(
       `../pages/${name}.vue`,
       import.meta.glob<DefineComponent>('../pages/**/*.vue')
     )
+    page.default.layout = page.default.layout || AppLayout
+
+    return page
   },
 
   setup({ el, App, props, plugin }) {
