@@ -20,6 +20,7 @@ router
   .group(() => {
     router.get('/login', [LoginController, 'render']).as('login.render')
     router.get('/register', [RegisterController, 'render']).as('register.render')
+    router.post('/register', [RegisterController, 'handle']).as('register.handle')
   })
   .prefix('/auth')
   .as('auth')

@@ -10,5 +10,20 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppHead: typeof import('./inertia/components/AppHead.vue')['default']
     Button: typeof import('./inertia/components/ui/button/Button.vue')['default']
+    FormInput: typeof import('./inertia/components/FormInput.vue')['default']
+    Input: typeof import('./inertia/components/ui/input/Input.vue')['default']
+    Label: typeof import('./inertia/components/ui/label/Label.vue')['default']
+    Select: typeof import('./inertia/components/ui/select/Select.vue')['default']
+    SelectContent: typeof import('./inertia/components/ui/select/SelectContent.vue')['default']
+    SelectGroup: typeof import('./inertia/components/ui/select/SelectGroup.vue')['default']
+    SelectItem: typeof import('./inertia/components/ui/select/SelectItem.vue')['default']
+    SelectItemText: typeof import('./inertia/components/ui/select/SelectItemText.vue')['default']
+    SelectLabel: typeof import('./inertia/components/ui/select/SelectLabel.vue')['default']
+    SelectScrollDownButton: typeof import('./inertia/components/ui/select/SelectScrollDownButton.vue')['default']
+    SelectScrollUpButton: typeof import('./inertia/components/ui/select/SelectScrollUpButton.vue')['default']
+    SelectSeparator: typeof import('./inertia/components/ui/select/SelectSeparator.vue')['default']
+    SelectTrigger: typeof import('./inertia/components/ui/select/SelectTrigger.vue')['default']
+    SelectValue: typeof import('./inertia/components/ui/select/SelectValue.vue')['default']
+    Textarea: typeof import('./inertia/components/ui/textarea/Textarea.vue')['default']
   }
 }
