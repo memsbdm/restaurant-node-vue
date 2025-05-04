@@ -13,6 +13,6 @@ export default class RegisterController {
     const data = await request.validateUsing(registerValidator)
     await register.handle({ data })
 
-    return response.redirect().toRoute('home.render')
+    return response.redirect().toRoute('restaurants.create.render')
   }
 }

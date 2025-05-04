@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { UserDto } from '#dtos/user'
+
 defineProps<{
+  user?: UserDto
   messages?: Record<string, string | Record<string, string>>
 }>()
 </script>
@@ -33,7 +36,7 @@ defineProps<{
           </Link>
         </div>
 
-        <div class="flex flex-1 justify-end gap-4">
+        <div v-if="!user" class="flex flex-1 justify-end gap-4">
           <Link route="auth.register.render" class="text-sm font-semibold leading-6 text-slate-900">
             Register
           </Link>

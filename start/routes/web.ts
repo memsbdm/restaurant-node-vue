@@ -8,11 +8,13 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import { middleware } from './kernel.js'
+import { middleware } from '#start/kernel'
 const HomeController = () => import('#controllers/home_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
 const RegisterController = () => import('#controllers/auth/register_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
+const CreateRestaurantController = () =>
+  import('#controllers/restaurants/create_restaurant_controller')
 
 // Landing page
 router.get('/', [HomeController, 'render']).use(middleware.auth()).as('home.render')
@@ -36,3 +38,13 @@ router
   })
   .prefix('/auth')
   .as('auth')
+
+// Restaurants
+router
+  .group(() => {
+    router.get('/', [CreateRestaurantController, 'render']).as('create.render')
+    router.post('/', [CreateRestaurantController, 'handle']).as('create.handle')
+  })
+  .use(middleware.auth())
+  .prefix('/restaurants')
+  .as('restaurants')

@@ -27,6 +27,18 @@ type AuthLogoutDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/logout_controller.ts').default['handle'], false>
 }
+type RestaurantsGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['render'], false>
+}
+type RestaurantsPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['createRestaurantValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'], true>
+}
+type ApiV1GooglePlacesautocompletePost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
+}
 export interface ApiDefinition {
   'auth': {
     'login': {
@@ -47,6 +59,24 @@ export interface ApiDefinition {
       '$url': {
       };
       '$delete': AuthLogoutDelete;
+    };
+  };
+  'restaurants': {
+    '$url': {
+    };
+    '$get': RestaurantsGetHead;
+    '$head': RestaurantsGetHead;
+    '$post': RestaurantsPost;
+  };
+  'api': {
+    'v1': {
+      'google': {
+        'places-autocomplete': {
+          '$url': {
+          };
+          '$post': ApiV1GooglePlacesautocompletePost;
+        };
+      };
     };
   };
 }
@@ -92,6 +122,27 @@ const routes = [
     path: '/auth/logout',
     method: ["DELETE"],
     types: {} as AuthLogoutDelete,
+  },
+  {
+    params: [],
+    name: 'restaurants.create.render',
+    path: '/restaurants',
+    method: ["GET","HEAD"],
+    types: {} as RestaurantsGetHead,
+  },
+  {
+    params: [],
+    name: 'restaurants.create.handle',
+    path: '/restaurants',
+    method: ["POST"],
+    types: {} as RestaurantsPost,
+  },
+  {
+    params: [],
+    name: 'api.google.autocomplete',
+    path: '/api/v1/google/places-autocomplete',
+    method: ["POST"],
+    types: {} as ApiV1GooglePlacesautocompletePost,
   },
 ] as const;
 export const api = {
