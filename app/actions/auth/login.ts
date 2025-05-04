@@ -16,6 +16,8 @@ export default class Login {
     const user = await User.verifyCredentials(data.email, data.password)
     await this.ctx.auth.use('web').login(user, data.remember)
 
+    this.ctx.session.flash('success', 'Successfully logged in')
+
     return { user }
   }
 }

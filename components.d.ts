@@ -28,6 +28,16 @@ declare module 'vue' {
     SelectSeparator: typeof import('./inertia/components/ui/select/SelectSeparator.vue')['default']
     SelectTrigger: typeof import('./inertia/components/ui/select/SelectTrigger.vue')['default']
     SelectValue: typeof import('./inertia/components/ui/select/SelectValue.vue')['default']
+    Sonner: typeof import('./inertia/components/ui/sonner/Sonner.vue')['default']
     Textarea: typeof import('./inertia/components/ui/textarea/Textarea.vue')['default']
+    Toast: typeof import('./inertia/components/ui/toast/Toast.vue')['default']
+    ToastAction: typeof import('./inertia/components/ui/toast/ToastAction.vue')['default']
+    ToastClose: typeof import('./inertia/components/ui/toast/ToastClose.vue')['default']
+    ToastDescription: typeof import('./inertia/components/ui/toast/ToastDescription.vue')['default']
+    Toaster: typeof import('./inertia/components/ui/toast/Toaster.vue')['default']
+    ToastManager: typeof import('./inertia/components/ToastManager.vue')['default']
+    ToastProvider: typeof import('./inertia/components/ui/toast/ToastProvider.vue')['default']
+    ToastTitle: typeof import('./inertia/components/ui/toast/ToastTitle.vue')['default']
+    ToastViewport: typeof import('./inertia/components/ui/toast/ToastViewport.vue')['default']
   }
 }

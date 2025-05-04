@@ -7,5 +7,6 @@ export default class Logout {
 
   async handle() {
     await this.ctx.auth.use('web').logout()
+    this.ctx.session.flash('success', 'Successfully logged out')
   }
 }
