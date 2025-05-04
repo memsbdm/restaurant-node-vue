@@ -23,6 +23,10 @@ type AuthRegisterPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['registerValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/auth/register_controller.ts').default['handle'], true>
 }
+type AuthLogoutDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/auth/logout_controller.ts').default['handle'], false>
+}
 export interface ApiDefinition {
   'auth': {
     'login': {
@@ -38,6 +42,11 @@ export interface ApiDefinition {
       '$get': AuthRegisterGetHead;
       '$head': AuthRegisterGetHead;
       '$post': AuthRegisterPost;
+    };
+    'logout': {
+      '$url': {
+      };
+      '$delete': AuthLogoutDelete;
     };
   };
 }
@@ -76,6 +85,13 @@ const routes = [
     path: '/auth/register',
     method: ["POST"],
     types: {} as AuthRegisterPost,
+  },
+  {
+    params: [],
+    name: 'auth.logout.handle',
+    path: '/auth/logout',
+    method: ["DELETE"],
+    types: {} as AuthLogoutDelete,
   },
 ] as const;
 export const api = {
