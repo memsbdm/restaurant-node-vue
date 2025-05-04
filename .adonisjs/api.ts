@@ -11,6 +11,10 @@ type AuthLoginGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['render'], false>
 }
+type AuthLoginPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['loginValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['handle'], true>
+}
 type AuthRegisterGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/register_controller.ts').default['render'], false>
@@ -26,6 +30,7 @@ export interface ApiDefinition {
       };
       '$get': AuthLoginGetHead;
       '$head': AuthLoginGetHead;
+      '$post': AuthLoginPost;
     };
     'register': {
       '$url': {
@@ -50,6 +55,13 @@ const routes = [
     path: '/auth/login',
     method: ["GET","HEAD"],
     types: {} as AuthLoginGetHead,
+  },
+  {
+    params: [],
+    name: 'auth.login.handle',
+    path: '/auth/login',
+    method: ["POST"],
+    types: {} as AuthLoginPost,
   },
   {
     params: [],

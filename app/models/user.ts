@@ -8,6 +8,7 @@ import PasswordResetToken from './password_reset_token.js'
 import VerifyEmailToken from './verify_email_token.js'
 import Restaurant from './restaurant.js'
 import EmailHistory from './email_history.js'
+import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -50,4 +51,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @hasMany(() => EmailHistory)
   declare emailHistories: HasMany<typeof EmailHistory>
+
+  static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
 }
