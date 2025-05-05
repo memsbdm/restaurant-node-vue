@@ -3,17 +3,20 @@ import { createRestaurantValidator } from '#validators/restaurant'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import { SimpleMessagesProvider } from '@vinejs/vine'
+import SetActiveRestaurant from '#actions/restaurants/http/set_active_restaurant'
 
+@inject()
 export default class CreateRestaurantController {
+  constructor(
+    protected setActiveRestaurant: SetActiveRestaurant,
+    protected createRestaurant: CreateRestaurant
+  ) {}
+
   render({ inertia }: HttpContext) {
     return inertia.render('restaurants/create')
   }
 
-  @inject()
-  async handle(
-    { auth, request, response, session }: HttpContext,
-    createRestaurant: CreateRestaurant
-  ) {
+  async handle({ auth, request, response, session }: HttpContext) {
     const data = await request.validateUsing(createRestaurantValidator, {
       meta: {
         userId: auth.use('web').user!.id,
@@ -24,7 +27,8 @@ export default class CreateRestaurantController {
           'Please select your restaurant from the list. If not in the list, please contact the support.',
       }),
     })
-    await createRestaurant.handle({ user: auth.use('web').user!, data })
+    const restaurant = await this.createRestaurant.handle({ user: auth.use('web').user!, data })
+    this.setActiveRestaurant.handle({ id: restaurant.id })
     session.flash('success', 'Restaurant successfully added!')
 
     return response.redirect().toRoute('home.render')

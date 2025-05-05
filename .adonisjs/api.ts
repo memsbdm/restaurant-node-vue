@@ -55,6 +55,10 @@ type RestaurantsPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['createRestaurantValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'], true>
 }
+type RestaurantsIdGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/active_restaurant_controller.ts').default['handle'], false>
+}
 export interface ApiDefinition {
   'api': {
     'v1': {
@@ -112,6 +116,12 @@ export interface ApiDefinition {
     '$get': RestaurantsGetHead;
     '$head': RestaurantsGetHead;
     '$post': RestaurantsPost;
+    ':id': {
+      '$url': {
+      };
+      '$get': RestaurantsIdGetHead;
+      '$head': RestaurantsIdGetHead;
+    };
   };
 }
 const routes = [
@@ -205,6 +215,13 @@ const routes = [
     path: '/restaurants',
     method: ["POST"],
     types: {} as RestaurantsPost,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.active.handle',
+    path: '/restaurants/:id',
+    method: ["GET","HEAD"],
+    types: {} as RestaurantsIdGetHead,
   },
 ] as const;
 export const api = {

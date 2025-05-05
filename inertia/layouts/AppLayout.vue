@@ -4,10 +4,13 @@ import { UserCircle } from 'lucide-vue-next'
 import ToastManager, { type Toast } from '~/components/ToastManager.vue'
 import { Link } from '@inertiajs/vue3'
 import { tuyau } from '~/core/providers/tuyau'
+import type RestaurantDto from '#dtos/restaurant'
 
 const props = defineProps<{
   user: UserDto
   messages: Record<string, Toast>
+  restaurant: RestaurantDto
+  restaurants: RestaurantDto[]
 }>()
 </script>
 

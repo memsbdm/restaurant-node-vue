@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import { Menu, Slash, Route } from 'lucide-vue-next'
+import type RestaurantDto from '#dtos/restaurant'
+import type UserDto from '#dtos/user'
+import type { Toast } from '~/components/ToastManager.vue'
 
-const props = defineProps<{
+defineProps<{
   user: UserDto
-  messages?: Record<string, string | Record<string, string>>
+  messages: Record<string, Toast>
+  restaurant: RestaurantDto
+  restaurants: RestaurantDto[]
 }>()
 </script>
 
@@ -18,7 +23,7 @@ const props = defineProps<{
     <div class="flex items-center">
       <Slash class="text-slate-300 w-4 h-4 -rotate-12" />
 
-      <span>TODO: SELECT RESTAURANT</span>
+      <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" />
 
       <Slash class="text-slate-300 w-4 h-4 -rotate-12" />
     </div>
@@ -49,7 +54,7 @@ const props = defineProps<{
           <span class="sr-only">Restaurant App</span>
         </Link>
 
-        <span>TODO: SELECT RESTAURANT</span>
+        <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" />
 
         <Link
           route="home.render"

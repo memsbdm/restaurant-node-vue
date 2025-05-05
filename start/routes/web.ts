@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const ActiveRestaurantController = () =>
+  import('#controllers/restaurants/active_restaurant_controller')
 const ForgotPasswordController = () => import('#controllers/auth/forgot_password_controller')
 const HomeController = () => import('#controllers/home_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
@@ -18,7 +20,10 @@ const CreateRestaurantController = () =>
   import('#controllers/restaurants/create_restaurant_controller')
 
 // Landing page
-router.get('/', [HomeController, 'render']).use(middleware.auth()).as('home.render')
+router
+  .get('/', [HomeController, 'render'])
+  .use([middleware.auth(), middleware.restaurant()])
+  .as('home.render')
 
 // Auth
 router
@@ -58,6 +63,7 @@ router
   .group(() => {
     router.get('/', [CreateRestaurantController, 'render']).as('create.render')
     router.post('/', [CreateRestaurantController, 'handle']).as('create.handle')
+    router.get('/:id', [ActiveRestaurantController, 'handle']).as('active.handle')
   })
   .use(middleware.auth())
   .prefix('/restaurants')
