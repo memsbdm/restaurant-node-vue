@@ -56,11 +56,14 @@ const form = useForm({
         required
       />
 
-      <div class="flex items-center gap-2">
-        <Checkbox v-model="form.remember" />
-        <span class="text-sm">Remember me</span>
-      </div>
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-2">
+          <Checkbox v-model="form.remember" />
+          <span class="text-sm">Remember me</span>
+        </div>
 
+        <Link route="auth.forgot-password.render" class="text-sm underline">Forgot Password</Link>
+      </div>
       <Button type="submit" :disabled="form.processing">
         <Loader v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
         Login

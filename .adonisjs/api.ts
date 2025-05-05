@@ -7,6 +7,10 @@
 import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
+type ApiV1GooglePlacesautocompletePost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
+}
 type AuthLoginGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['render'], false>
@@ -23,6 +27,22 @@ type AuthRegisterPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['registerValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/auth/register_controller.ts').default['handle'], true>
 }
+type AuthForgotpasswordGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['render'], false>
+}
+type AuthForgotpasswordPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['passwordResetSendValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['send'], true>
+}
+type AuthForgotpasswordResetIdGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['reset'], false>
+}
+type AuthForgotpasswordResetPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['passwordResetValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['update'], true>
+}
 type AuthLogoutDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/logout_controller.ts').default['handle'], false>
@@ -35,11 +55,18 @@ type RestaurantsPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['createRestaurantValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'], true>
 }
-type ApiV1GooglePlacesautocompletePost = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
-}
 export interface ApiDefinition {
+  'api': {
+    'v1': {
+      'google': {
+        'places-autocomplete': {
+          '$url': {
+          };
+          '$post': ApiV1GooglePlacesautocompletePost;
+        };
+      };
+    };
+  };
   'auth': {
     'login': {
       '$url': {
@@ -55,6 +82,24 @@ export interface ApiDefinition {
       '$head': AuthRegisterGetHead;
       '$post': AuthRegisterPost;
     };
+    'forgot-password': {
+      '$url': {
+      };
+      '$get': AuthForgotpasswordGetHead;
+      '$head': AuthForgotpasswordGetHead;
+      '$post': AuthForgotpasswordPost;
+      'reset': {
+        ':value': {
+          '$url': {
+          };
+          '$get': AuthForgotpasswordResetIdGetHead;
+          '$head': AuthForgotpasswordResetIdGetHead;
+        };
+        '$url': {
+        };
+        '$patch': AuthForgotpasswordResetPatch;
+      };
+    };
     'logout': {
       '$url': {
       };
@@ -68,19 +113,15 @@ export interface ApiDefinition {
     '$head': RestaurantsGetHead;
     '$post': RestaurantsPost;
   };
-  'api': {
-    'v1': {
-      'google': {
-        'places-autocomplete': {
-          '$url': {
-          };
-          '$post': ApiV1GooglePlacesautocompletePost;
-        };
-      };
-    };
-  };
 }
 const routes = [
+  {
+    params: [],
+    name: 'api.google.autocomplete',
+    path: '/api/v1/google/places-autocomplete',
+    method: ["POST"],
+    types: {} as ApiV1GooglePlacesautocompletePost,
+  },
   {
     params: [],
     name: 'home.render',
@@ -118,6 +159,34 @@ const routes = [
   },
   {
     params: [],
+    name: 'auth.forgot-password.render',
+    path: '/auth/forgot-password',
+    method: ["GET","HEAD"],
+    types: {} as AuthForgotpasswordGetHead,
+  },
+  {
+    params: [],
+    name: 'auth.forgot-password.send',
+    path: '/auth/forgot-password',
+    method: ["POST"],
+    types: {} as AuthForgotpasswordPost,
+  },
+  {
+    params: ["value"],
+    name: 'auth.forgot-password.reset',
+    path: '/auth/forgot-password/reset/:value',
+    method: ["GET","HEAD"],
+    types: {} as AuthForgotpasswordResetIdGetHead,
+  },
+  {
+    params: [],
+    name: 'auth.forgot-password.update',
+    path: '/auth/forgot-password/reset',
+    method: ["PATCH"],
+    types: {} as AuthForgotpasswordResetPatch,
+  },
+  {
+    params: [],
     name: 'auth.logout.handle',
     path: '/auth/logout',
     method: ["DELETE"],
@@ -136,13 +205,6 @@ const routes = [
     path: '/restaurants',
     method: ["POST"],
     types: {} as RestaurantsPost,
-  },
-  {
-    params: [],
-    name: 'api.google.autocomplete',
-    path: '/api/v1/google/places-autocomplete',
-    method: ["POST"],
-    types: {} as ApiV1GooglePlacesautocompletePost,
   },
 ] as const;
 export const api = {

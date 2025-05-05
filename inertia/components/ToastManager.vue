@@ -2,7 +2,7 @@
 import { onMounted, watchEffect } from 'vue'
 import { toast } from 'vue-sonner'
 
-type Toast = string | Record<string, string>
+export type Toast = string | Record<string, string>
 
 const props = defineProps<{
   messages: Record<string, Toast>

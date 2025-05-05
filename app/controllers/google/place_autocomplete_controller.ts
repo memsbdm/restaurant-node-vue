@@ -10,8 +10,6 @@ export default class PlacesAutocompleteController {
     headers.accept = 'application/json'
 
     const data = await request.validateUsing(placeAutocompleteValidator)
-    const places = await placeAutocomplete.handle({ data })
-
-    return places
+    return await placeAutocomplete.handle({ data })
   }
 }

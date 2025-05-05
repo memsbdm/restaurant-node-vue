@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Search } from 'lucide-vue-next'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { PlaceAutocompleteDto } from '#dtos/place_autocomplete'
 import { tuyau } from '~/core/providers/tuyau'
-import { computed } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 
 let input = ref('')
@@ -43,8 +42,7 @@ const debouncedFetchPlaces = useDebounceFn(async (value: string) => {
       'Content-Type': 'application/json',
     },
   })
-  const json = await res.json()
-  places.value = json
+  places.value = await res.json()
 }, 300)
 
 const value = ref<(typeof places.value)[0]>()

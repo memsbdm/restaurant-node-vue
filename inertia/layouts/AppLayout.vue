@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import UserDto from '#dtos/user'
 import { UserCircle } from 'lucide-vue-next'
-import ToastManager from '~/components/ToastManager.vue'
+import ToastManager, { type Toast } from '~/components/ToastManager.vue'
 import { Link } from '@inertiajs/vue3'
 import { tuyau } from '~/core/providers/tuyau'
 
 const props = defineProps<{
   user: UserDto
-  messages?: Record<string, string | Record<string, string>>
+  messages: Record<string, Toast>
 }>()
 </script>
 

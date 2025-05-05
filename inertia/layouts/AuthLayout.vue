@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { UserDto } from '#dtos/user'
+import type UserDto from '#dtos/user'
+import type { Toast } from '~/components/ToastManager.vue'
 
 defineProps<{
   user?: UserDto
-  messages?: Record<string, string | Record<string, string>>
+  messages: Record<string, Toast>
 }>()
 </script>
 
