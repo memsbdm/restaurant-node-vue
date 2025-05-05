@@ -1,4 +1,4 @@
-import Login from '#actions/auth/login'
+import Login from '#actions/auth/http/login'
 import { loginValidator } from '#validators/auth'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'

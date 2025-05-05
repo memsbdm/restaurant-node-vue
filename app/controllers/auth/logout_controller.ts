@@ -1,4 +1,4 @@
-import Logout from '#actions/auth/logout'
+import Logout from '#actions/auth/http/logout'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 
