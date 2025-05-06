@@ -7,6 +7,10 @@
 import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
+type ApiV1GooglePlacesautocompletePost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
+}
 type AuthLoginGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['render'], false>
@@ -79,11 +83,30 @@ type MenusIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/menus/delete_menu_controller.ts').default['handle'], false>
 }
-type ApiV1GooglePlacesautocompletePost = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
+type CategoriesMenusIdCategoriesPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/category.ts')['categoryValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/categories/create_category_controller.ts').default['handle'], true>
+}
+type CategoriesMenusIdCategoriesIdPut = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/category.ts')['categoryValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/categories/update_category_controller.ts').default['handle'], true>
+}
+type CategoriesMenusIdCategoriesIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/categories/delete_category_controller.ts').default['handle'], false>
 }
 export interface ApiDefinition {
+  'api': {
+    'v1': {
+      'google': {
+        'places-autocomplete': {
+          '$url': {
+          };
+          '$post': ApiV1GooglePlacesautocompletePost;
+        };
+      };
+    };
+  };
   'auth': {
     'login': {
       '$url': {
@@ -152,19 +175,32 @@ export interface ApiDefinition {
     };
     '$post': MenusPost;
   };
-  'api': {
-    'v1': {
-      'google': {
-        'places-autocomplete': {
+  'categories': {
+    'menus': {
+      ':menuId': {
+        'categories': {
           '$url': {
           };
-          '$post': ApiV1GooglePlacesautocompletePost;
+          '$post': CategoriesMenusIdCategoriesPost;
+          ':categoryId': {
+            '$url': {
+            };
+            '$put': CategoriesMenusIdCategoriesIdPut;
+            '$delete': CategoriesMenusIdCategoriesIdDelete;
+          };
         };
       };
     };
   };
 }
 const routes = [
+  {
+    params: [],
+    name: 'api.google.autocomplete',
+    path: '/api/v1/google/places-autocomplete',
+    method: ["POST"],
+    types: {} as ApiV1GooglePlacesautocompletePost,
+  },
   {
     params: [],
     name: 'home.render',
@@ -299,11 +335,32 @@ const routes = [
     types: {} as MenusIdDelete,
   },
   {
-    params: [],
-    name: 'api.google.autocomplete',
-    path: '/api/v1/google/places-autocomplete',
+    params: ["menuId"],
+    name: 'categories.create.handle',
+    path: '/categories/menus/:menuId/categories',
     method: ["POST"],
-    types: {} as ApiV1GooglePlacesautocompletePost,
+    types: {} as CategoriesMenusIdCategoriesPost,
+  },
+  {
+    params: ["menuId","categoryId"],
+    name: 'categories.update.handle',
+    path: '/categories/menus/:menuId/categories/:categoryId',
+    method: ["PUT"],
+    types: {} as CategoriesMenusIdCategoriesIdPut,
+  },
+  {
+    params: ["menuId","categoryId"],
+    name: 'categories.delete.handle',
+    path: '/categories/menus/:menuId/categories/:categoryId',
+    method: ["DELETE"],
+    types: {} as CategoriesMenusIdCategoriesIdDelete,
+  },
+  {
+    params: ["menuId"],
+    name: 'categories.order.handle',
+    path: '/categories/menus/:menuId/categories/order',
+    method: ["PATCH"],
+    types: {} as unknown,
   },
 ] as const;
 export const api = {

@@ -1,3 +1,4 @@
+import Menu from '#models/menu'
 import Restaurant from '#models/restaurant'
 
 type Params = {
@@ -7,8 +8,17 @@ type Params = {
 
 export default class GetMenu {
   static async handle({ id, restaurant }: Params) {
-    const menu = await restaurant.related('menus').query().where({ id }).firstOrFail()
+    const menu = await restaurant
+      .related('menus')
+      .query()
+      .withCount('articles')
+      .where({ id })
+      .firstOrFail()
+    const categories = await this.#getCategories(menu)
+    return { menu, categories }
+  }
 
-    return { menu }
+  static async #getCategories(menu: Menu) {
+    return menu.related('categories').query().preload('articles').orderBy('order')
   }
 }

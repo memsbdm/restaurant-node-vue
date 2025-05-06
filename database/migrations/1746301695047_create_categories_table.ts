@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.bigIncrements('id')
-      table.string('name', 30).notNullable()
+      table.string('name', 50).notNullable()
       table.string('description').nullable()
       table.integer('order').unsigned().notNullable().defaultTo(0)
       table.bigInteger('menu_id').references('menus.id').onDelete('CASCADE').notNullable()

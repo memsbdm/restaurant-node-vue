@@ -14,8 +14,8 @@ export default class CreateMenuController {
 
   async handle({ request, response, restaurant }: HttpContext) {
     const data = await request.validateUsing(menuValidator)
-    await CreateMenu.handle({ restaurant, data })
+    const menu = await CreateMenu.handle({ restaurant, data })
 
-    return response.redirect().back()
+    return response.redirect().toRoute('menus.show.render', { id: menu.id })
   }
 }

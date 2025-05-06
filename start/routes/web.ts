@@ -9,6 +9,11 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const UpdateCategoryOrderController = () =>
+  import('#controllers/categories/update_category_order_controller')
+const DeleteCategoryController = () => import('#controllers/categories/delete_category_controller')
+const UpdateCategoryController = () => import('#controllers/categories/update_category_controller')
+const CreateCategoryController = () => import('#controllers/categories/create_category_controller')
 const DeleteMenuController = () => import('#controllers/menus/delete_menu_controller')
 const ActiveMenuController = () => import('#controllers/menus/active_menu_controller')
 const ActiveRestaurantController = () =>
@@ -87,3 +92,23 @@ router
   .use([middleware.auth(), middleware.restaurant()])
   .prefix('/menus')
   .as('menus')
+
+// Categories
+router
+  .group(() => {
+    router
+      .post('/menus/:menuId/categories', [CreateCategoryController, 'handle'])
+      .as('create.handle')
+    router
+      .put('/menus/:menuId/categories/:categoryId', [UpdateCategoryController, 'handle'])
+      .as('update.handle')
+    router
+      .delete('/menus/:menuId/categories/:categoryId', [DeleteCategoryController, 'handle'])
+      .as('delete.handle')
+    router
+      .patch('/menus/:menuId/categories/order', [UpdateCategoryOrderController, 'handle'])
+      .as('order.handle')
+  })
+  .use([middleware.auth(), middleware.restaurant()])
+  .prefix('/categories')
+  .as('categories')
