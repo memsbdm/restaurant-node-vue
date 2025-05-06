@@ -60,6 +60,7 @@ declare module 'vue' {
     FormInput: typeof import('./inertia/components/FormInput.vue')['default']
     Input: typeof import('./inertia/components/ui/input/Input.vue')['default']
     Label: typeof import('./inertia/components/ui/label/Label.vue')['default']
+    MenuActions: typeof import('./inertia/components/MenuActions.vue')['default']
     Navigation: typeof import('./inertia/components/Navigation.vue')['default']
     PlaceAutocomplete: typeof import('./inertia/components/google/PlaceAutocomplete.vue')['default']
     RestaurantSelect: typeof import('./inertia/components/RestaurantSelect.vue')['default']

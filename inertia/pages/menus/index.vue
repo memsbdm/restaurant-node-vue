@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MenuDto from '#dtos/menu'
 import RestaurantDto from '#dtos/restaurant'
-import { Pencil, Plus, Trash2 } from 'lucide-vue-next'
+import { Plus } from 'lucide-vue-next'
 import { ref, watchEffect } from 'vue'
 import { useResourceActions } from '~/composables/resource_actions'
 import { tuyau } from '~/core/providers/tuyau'
@@ -13,21 +13,11 @@ const props = defineProps<{
 }>()
 
 const list = ref(props.menus)
-const { form, dialog, destroy, onSuccess } = useResourceActions<MenuDto>()({
+const { form, dialog, onSuccess } = useResourceActions<MenuDto>()({
   name: '',
 })
 
 watchEffect(() => (list.value = props.menus))
-
-function onEdit(resource: MenuDto) {
-  dialog.value.open(resource, {
-    name: resource.name,
-  })
-}
-
-function onDestroyShow(resource: MenuDto) {
-  destroy.value.open(resource)
-}
 </script>
 
 <template>
@@ -43,11 +33,12 @@ function onDestroyShow(resource: MenuDto) {
       </Button>
     </div>
 
-    <ul class="flex flex-col">
+    <ul class="flex flex-col px-1">
       <li
         v-for="item in list"
         :key="item.id"
-        class="flex items-center justify-between rounded-md px-3 py-1.5 hover:bg-slate-100 duration-300 group"
+        @click="router.get(tuyau.$url('menus.show.render', { params: { id: item.id } }))"
+        class="flex items-center justify-between rounded-md px-3 py-1.5 cursor-pointer hover:bg-slate-100 duration-300 group"
       >
         <div class="flex items-center gap-4">
           <span class="font-semibold">{{ item.name }}</span>
@@ -57,17 +48,12 @@ function onDestroyShow(resource: MenuDto) {
         <div class="flex gap-2">
           <div class="flex items-center space-x-2">
             <Switch
-              @click="router.patch(tuyau.$url('menus.active.handle', { params: { id: item.id } }))"
+              @click.stop="
+                router.patch(tuyau.$url('menus.active.handle', { params: { id: item.id } }))
+              "
               :model-value="item.isActive"
             />
           </div>
-
-          <Button size="xs" @click="onEdit(item)">
-            <Pencil class="w-3 h-3" aria-label="Edit Menu" />
-          </Button>
-          <Button size="xs" variant="destructive" @click="onDestroyShow(item)">
-            <Trash2 class="w-3 h-3" aria-label="Delete Menu" />
-          </Button>
         </div>
       </li>
     </ul>
@@ -86,17 +72,5 @@ function onDestroyShow(resource: MenuDto) {
     >
       <FormInput label="Name" v-model="form.name" :error="form.errors.name" />
     </FormDialog>
-
-    <ConfirmDestroyDialog
-      v-model:open="destroy.isOpen"
-      title="Delete Menu?"
-      :action-href="
-        destroy.resource
-          ? tuyau.$url('menus.delete.handle', { params: { id: destroy.resource.id } })
-          : ''
-      "
-    >
-      Are you sure you'd like to delete your <strong>{{ destroy.resource?.name }}</strong> menu?
-    </ConfirmDestroyDialog>
   </div>
 </template>

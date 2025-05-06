@@ -6,6 +6,6 @@ export default class DeleteMenuController {
     await DeleteMenu.handle({ id: params.id, restaurant })
     session.flash('success', 'Menu deleted successfully')
 
-    return response.redirect().back()
+    return response.redirect().toRoute('menus.create.render')
   }
 }

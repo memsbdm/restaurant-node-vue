@@ -7,10 +7,6 @@
 import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
-type ApiV1GooglePlacesautocompletePost = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
-}
 type AuthLoginGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['render'], false>
@@ -63,6 +59,10 @@ type MenusGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['render'], false>
 }
+type MenusIdGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/menus/show_menu_controller.ts').default['render'], false>
+}
 type MenusPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['menuValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['handle'], true>
@@ -79,18 +79,11 @@ type MenusIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/menus/delete_menu_controller.ts').default['handle'], false>
 }
+type ApiV1GooglePlacesautocompletePost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
+}
 export interface ApiDefinition {
-  'api': {
-    'v1': {
-      'google': {
-        'places-autocomplete': {
-          '$url': {
-          };
-          '$post': ApiV1GooglePlacesautocompletePost;
-        };
-      };
-    };
-  };
   'auth': {
     'login': {
       '$url': {
@@ -148,24 +141,30 @@ export interface ApiDefinition {
     };
     '$get': MenusGetHead;
     '$head': MenusGetHead;
-    '$post': MenusPost;
     ':id': {
       '$url': {
       };
+      '$get': MenusIdGetHead;
+      '$head': MenusIdGetHead;
       '$put': MenusIdPut;
       '$patch': MenusIdPatch;
       '$delete': MenusIdDelete;
     };
+    '$post': MenusPost;
+  };
+  'api': {
+    'v1': {
+      'google': {
+        'places-autocomplete': {
+          '$url': {
+          };
+          '$post': ApiV1GooglePlacesautocompletePost;
+        };
+      };
+    };
   };
 }
 const routes = [
-  {
-    params: [],
-    name: 'api.google.autocomplete',
-    path: '/api/v1/google/places-autocomplete',
-    method: ["POST"],
-    types: {} as ApiV1GooglePlacesautocompletePost,
-  },
   {
     params: [],
     name: 'home.render',
@@ -265,6 +264,13 @@ const routes = [
     types: {} as MenusGetHead,
   },
   {
+    params: ["id"],
+    name: 'menus.show.render',
+    path: '/menus/:id',
+    method: ["GET","HEAD"],
+    types: {} as MenusIdGetHead,
+  },
+  {
     params: [],
     name: 'menus.create.handle',
     path: '/menus',
@@ -291,6 +297,13 @@ const routes = [
     path: '/menus/:id',
     method: ["DELETE"],
     types: {} as MenusIdDelete,
+  },
+  {
+    params: [],
+    name: 'api.google.autocomplete',
+    path: '/api/v1/google/places-autocomplete',
+    method: ["POST"],
+    types: {} as ApiV1GooglePlacesautocompletePost,
   },
 ] as const;
 export const api = {

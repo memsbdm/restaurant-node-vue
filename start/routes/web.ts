@@ -22,6 +22,7 @@ const CreateRestaurantController = () =>
   import('#controllers/restaurants/create_restaurant_controller')
 const CreateMenuController = () => import('#controllers/menus/create_menu_controller')
 const UpdateMenuController = () => import('#controllers/menus/update_menu_controller')
+const ShowMenuController = () => import('#controllers/menus/show_menu_controller')
 
 // Landing page
 router
@@ -77,6 +78,7 @@ router
 router
   .group(() => {
     router.get('/', [CreateMenuController, 'render']).as('create.render')
+    router.get('/:id', [ShowMenuController, 'render']).as('show.render')
     router.post('/', [CreateMenuController, 'handle']).as('create.handle')
     router.put('/:id', [UpdateMenuController, 'handle']).as('update.handle')
     router.patch('/:id', [ActiveMenuController, 'handle']).as('active.handle')
