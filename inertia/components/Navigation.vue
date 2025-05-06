@@ -29,7 +29,7 @@ defineProps<{
     </div>
 
     <Link
-      route="home.render"
+      route="menus.create.render"
       class="desktop-link"
       :class="{ active: $page.url.startsWith('/menus') }"
     >
@@ -57,7 +57,7 @@ defineProps<{
         <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" />
 
         <Link
-          route="home.render"
+          route="menus.create.render"
           class="mobile-link"
           :class="{ active: $page.url.startsWith('/menus') }"
         >

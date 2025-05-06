@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const ActiveMenuController = () => import('#controllers/menus/active_menu_controller')
 const ActiveRestaurantController = () =>
   import('#controllers/restaurants/active_restaurant_controller')
 const ForgotPasswordController = () => import('#controllers/auth/forgot_password_controller')
@@ -18,6 +19,8 @@ const RegisterController = () => import('#controllers/auth/register_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
 const CreateRestaurantController = () =>
   import('#controllers/restaurants/create_restaurant_controller')
+const CreateMenuController = () => import('#controllers/menus/create_menu_controller')
+const UpdateMenuController = () => import('#controllers/menus/update_menu_controller')
 
 // Landing page
 router
@@ -68,3 +71,15 @@ router
   .use(middleware.auth())
   .prefix('/restaurants')
   .as('restaurants')
+
+// Menus
+router
+  .group(() => {
+    router.get('/', [CreateMenuController, 'render']).as('create.render')
+    router.post('/', [CreateMenuController, 'handle']).as('create.handle')
+    router.put('/:id', [UpdateMenuController, 'handle']).as('update.handle')
+    router.patch('/:id', [ActiveMenuController, 'handle']).as('active.handle')
+  })
+  .use([middleware.auth(), middleware.restaurant()])
+  .prefix('/menus')
+  .as('menus')

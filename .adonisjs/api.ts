@@ -59,6 +59,22 @@ type RestaurantsIdGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/active_restaurant_controller.ts').default['handle'], false>
 }
+type MenusGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['render'], false>
+}
+type MenusPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['menuValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['handle'], true>
+}
+type MenusIdPut = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['menuValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/menus/update_menu_controller.ts').default['handle'], true>
+}
+type MenusIdPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['activeMenuValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/menus/active_menu_controller.ts').default['handle'], true>
+}
 export interface ApiDefinition {
   'api': {
     'v1': {
@@ -121,6 +137,19 @@ export interface ApiDefinition {
       };
       '$get': RestaurantsIdGetHead;
       '$head': RestaurantsIdGetHead;
+    };
+  };
+  'menus': {
+    '$url': {
+    };
+    '$get': MenusGetHead;
+    '$head': MenusGetHead;
+    '$post': MenusPost;
+    ':id': {
+      '$url': {
+      };
+      '$put': MenusIdPut;
+      '$patch': MenusIdPatch;
     };
   };
 }
@@ -222,6 +251,34 @@ const routes = [
     path: '/restaurants/:id',
     method: ["GET","HEAD"],
     types: {} as RestaurantsIdGetHead,
+  },
+  {
+    params: [],
+    name: 'menus.create.render',
+    path: '/menus',
+    method: ["GET","HEAD"],
+    types: {} as MenusGetHead,
+  },
+  {
+    params: [],
+    name: 'menus.create.handle',
+    path: '/menus',
+    method: ["POST"],
+    types: {} as MenusPost,
+  },
+  {
+    params: ["id"],
+    name: 'menus.update.handle',
+    path: '/menus/:id',
+    method: ["PUT"],
+    types: {} as MenusIdPut,
+  },
+  {
+    params: ["id"],
+    name: 'menus.active.handle',
+    path: '/menus/:id',
+    method: ["PATCH"],
+    types: {} as MenusIdPatch,
   },
 ] as const;
 export const api = {
