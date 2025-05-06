@@ -3,8 +3,8 @@ import VerifyEmailToken from '#models/verify_email_token'
 import UserDto from '#dtos/user'
 
 export default class VerifyEmailTokenDto extends BaseModelDto {
-  declare id: number
-  declare userId: number
+  declare id: string
+  declare userId: string
   declare value: string
   declare createdAt: string
   declare updatedAt: string

@@ -6,7 +6,7 @@ import ArticleDto from '#dtos/article'
 import RestaurantInviteDto from '#dtos/restaurant_invite'
 
 export default class RestaurantDto extends BaseModelDto {
-  declare id: number
+  declare id: string
   declare createdAt: string
   declare updatedAt: string
   declare name: string

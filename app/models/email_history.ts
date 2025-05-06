@@ -5,7 +5,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class EmailHistory extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -14,7 +14,7 @@ export default class EmailHistory extends BaseModel {
   declare updatedAt: DateTime
 
   @column()
-  declare userId: number
+  declare userId: string
 
   @column()
   declare emailOld: string

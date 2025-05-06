@@ -5,15 +5,15 @@ import ArticleDto from './article.js'
 import RestaurantDto from './restaurant.js'
 
 export default class CategoryDto extends BaseModelDto {
-  declare id: number
+  declare id: string
   declare name: string
   declare description: string | null
   declare order: number
   declare isDefault: boolean
-  declare menuId: number
+  declare menuId: string
   declare menu: MenuDto | null
 
-  declare restaurantId: number
+  declare restaurantId: string
   declare restaurant: RestaurantDto | null
   declare articles: ArticleDto[]
 

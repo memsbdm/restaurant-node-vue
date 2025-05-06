@@ -9,7 +9,7 @@ import Article from './article.js'
 
 export default class Restaurant extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

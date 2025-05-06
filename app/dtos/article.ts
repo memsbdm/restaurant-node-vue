@@ -4,16 +4,16 @@ import CategoryDto from '#dtos/category'
 import RestaurantDto from './restaurant.js'
 
 export default class ArticleDto extends BaseModelDto {
-  declare id: number
+  declare id: string
   declare name: string
   declare description: string
   declare priceInCents: number
   declare imageUrl: string | null
   declare order: number
-  declare categoryId: number
+  declare categoryId: string
   declare category: CategoryDto | null
 
-  declare restaurantId: number
+  declare restaurantId: string
   declare restaurant: RestaurantDto | null
 
   constructor(article?: Article) {

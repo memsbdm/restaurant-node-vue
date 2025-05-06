@@ -8,13 +8,13 @@ import Role from './role.js'
 
 export default class RestaurantInvite extends compose(BaseModel, WithRestaurant) {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column()
-  declare invitedByUserId: number
+  declare invitedByUserId: string
 
   @column()
-  declare canceledByUserId: number | null
+  declare canceledByUserId: string | null
 
   @column()
   declare roleId: number

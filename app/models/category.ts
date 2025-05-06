@@ -7,7 +7,7 @@ import Menu from './menu.js'
 
 export default class Category extends compose(BaseModel, WithRestaurant) {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column()
   declare name: string
@@ -22,7 +22,7 @@ export default class Category extends compose(BaseModel, WithRestaurant) {
   declare isDefault: boolean
 
   @column()
-  declare menuId: number
+  declare menuId: string
 
   @belongsTo(() => Menu)
   declare menu: BelongsTo<typeof Menu>

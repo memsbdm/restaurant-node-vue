@@ -6,7 +6,7 @@ import Category from './category.js'
 
 export default class Article extends compose(BaseModel, WithRestaurant) {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column()
   declare name: string
@@ -24,7 +24,7 @@ export default class Article extends compose(BaseModel, WithRestaurant) {
   declare order: number
 
   @column()
-  declare categoryId: number
+  declare categoryId: string
 
   @belongsTo(() => Category)
   declare category: BelongsTo<typeof Category>

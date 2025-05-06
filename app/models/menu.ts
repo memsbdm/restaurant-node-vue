@@ -8,7 +8,7 @@ import { DateTime } from 'luxon'
 
 export default class Menu extends compose(BaseModel, WithRestaurant) {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

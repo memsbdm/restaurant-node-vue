@@ -3,8 +3,8 @@ import PasswordResetToken from '#models/password_reset_token'
 import UserDto from '#dtos/user'
 
 export default class PasswordResetTokenDto extends BaseModelDto {
-  declare id: number
-  declare userId: number
+  declare id: string
+  declare userId: string
   declare value: string
   declare createdAt: string
   declare updatedAt: string

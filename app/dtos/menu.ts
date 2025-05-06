@@ -3,14 +3,16 @@ import Menu from '#models/menu'
 import RestaurantDto from './restaurant.js'
 
 export default class MenuDto extends BaseModelDto {
-  declare id: number
+  declare id: string
   declare createdAt: string
   declare updatedAt: string | null
   declare name: string
   declare isActive: boolean
 
-  declare restaurantId: number
+  declare restaurantId: string
   declare restaurant: RestaurantDto | null
+
+  declare meta: Record<string, any>
 
   constructor(menu?: Menu) {
     super()
@@ -24,5 +26,7 @@ export default class MenuDto extends BaseModelDto {
 
     this.restaurantId = menu.restaurantId
     this.restaurant = menu.restaurant && new RestaurantDto(menu.restaurant)
+
+    this.meta = menu.$extras
   }
 }

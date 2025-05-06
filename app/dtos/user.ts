@@ -4,7 +4,7 @@ import PasswordResetTokenDto from '#dtos/password_reset_token'
 import VerifyEmailTokenDto from '#dtos/verify_email_token'
 
 export default class UserDto extends BaseModelDto {
-  declare id: number
+  declare id: string
   declare createdAt: string
   declare updatedAt: string | null
   declare fullName: string

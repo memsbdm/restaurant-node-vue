@@ -6,7 +6,7 @@ import Restaurant from '#models/restaurant'
 export const WithRestaurant = <T extends NormalizeConstructor<typeof BaseModel>>(superclass: T) => {
   class MixinClass extends superclass {
     @column()
-    declare restaurantId: number
+    declare restaurantId: string
 
     @belongsTo(() => Restaurant)
     declare restaurant: BelongsTo<typeof Restaurant>
