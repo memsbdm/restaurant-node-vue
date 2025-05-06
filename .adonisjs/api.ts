@@ -72,8 +72,12 @@ type MenusIdPut = {
   response: MakeTuyauResponse<import('../app/controllers/menus/update_menu_controller.ts').default['handle'], true>
 }
 type MenusIdPatch = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['activeMenuValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/menus/active_menu_controller.ts').default['handle'], true>
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/menus/active_menu_controller.ts').default['handle'], false>
+}
+type MenusIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/menus/delete_menu_controller.ts').default['handle'], false>
 }
 export interface ApiDefinition {
   'api': {
@@ -150,6 +154,7 @@ export interface ApiDefinition {
       };
       '$put': MenusIdPut;
       '$patch': MenusIdPatch;
+      '$delete': MenusIdDelete;
     };
   };
 }
@@ -279,6 +284,13 @@ const routes = [
     path: '/menus/:id',
     method: ["PATCH"],
     types: {} as MenusIdPatch,
+  },
+  {
+    params: ["id"],
+    name: 'menus.delete.handle',
+    path: '/menus/:id',
+    method: ["DELETE"],
+    types: {} as MenusIdDelete,
   },
 ] as const;
 export const api = {

@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const DeleteMenuController = () => import('#controllers/menus/delete_menu_controller')
 const ActiveMenuController = () => import('#controllers/menus/active_menu_controller')
 const ActiveRestaurantController = () =>
   import('#controllers/restaurants/active_restaurant_controller')
@@ -79,6 +80,7 @@ router
     router.post('/', [CreateMenuController, 'handle']).as('create.handle')
     router.put('/:id', [UpdateMenuController, 'handle']).as('update.handle')
     router.patch('/:id', [ActiveMenuController, 'handle']).as('active.handle')
+    router.delete('/:id', [DeleteMenuController, 'handle']).as('delete.handle')
   })
   .use([middleware.auth(), middleware.restaurant()])
   .prefix('/menus')
