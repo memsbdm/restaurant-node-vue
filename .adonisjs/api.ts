@@ -7,10 +7,6 @@
 import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
-type ApiV1GooglePlacesautocompletePost = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
-}
 type AuthLoginGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['render'], false>
@@ -95,18 +91,31 @@ type CategoriesMenusIdCategoriesIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/categories/delete_category_controller.ts').default['handle'], false>
 }
+type CategoriesMenusIdCategoriesOrderPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/category.ts')['categoryOrderValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/categories/update_category_order_controller.ts').default['handle'], true>
+}
+type ArticlesPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/articles/create_article_controller.ts').default['handle'], true>
+}
+type ArticlesIdPut = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/articles/update_article_controller.ts').default['handle'], true>
+}
+type ArticlesMenusIdOrderPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleOrderValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/articles/update_article_order_controller.ts').default['handle'], true>
+}
+type ArticlesIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_controller.ts').default['handle'], false>
+}
+type ApiV1GooglePlacesautocompletePost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
+}
 export interface ApiDefinition {
-  'api': {
-    'v1': {
-      'google': {
-        'places-autocomplete': {
-          '$url': {
-          };
-          '$post': ApiV1GooglePlacesautocompletePost;
-        };
-      };
-    };
-  };
   'auth': {
     'login': {
       '$url': {
@@ -188,19 +197,48 @@ export interface ApiDefinition {
             '$put': CategoriesMenusIdCategoriesIdPut;
             '$delete': CategoriesMenusIdCategoriesIdDelete;
           };
+          'order': {
+            '$url': {
+            };
+            '$patch': CategoriesMenusIdCategoriesOrderPatch;
+          };
+        };
+      };
+    };
+  };
+  'articles': {
+    '$url': {
+    };
+    '$post': ArticlesPost;
+    ':id': {
+      '$url': {
+      };
+      '$put': ArticlesIdPut;
+      '$delete': ArticlesIdDelete;
+    };
+    'menus': {
+      ':menuId': {
+        'order': {
+          '$url': {
+          };
+          '$patch': ArticlesMenusIdOrderPatch;
+        };
+      };
+    };
+  };
+  'api': {
+    'v1': {
+      'google': {
+        'places-autocomplete': {
+          '$url': {
+          };
+          '$post': ApiV1GooglePlacesautocompletePost;
         };
       };
     };
   };
 }
 const routes = [
-  {
-    params: [],
-    name: 'api.google.autocomplete',
-    path: '/api/v1/google/places-autocomplete',
-    method: ["POST"],
-    types: {} as ApiV1GooglePlacesautocompletePost,
-  },
   {
     params: [],
     name: 'home.render',
@@ -360,7 +398,42 @@ const routes = [
     name: 'categories.order.handle',
     path: '/categories/menus/:menuId/categories/order',
     method: ["PATCH"],
-    types: {} as unknown,
+    types: {} as CategoriesMenusIdCategoriesOrderPatch,
+  },
+  {
+    params: [],
+    name: 'articles.create.handle',
+    path: '/articles',
+    method: ["POST"],
+    types: {} as ArticlesPost,
+  },
+  {
+    params: ["id"],
+    name: 'articles.update.handle',
+    path: '/articles/:id',
+    method: ["PUT"],
+    types: {} as ArticlesIdPut,
+  },
+  {
+    params: ["menuId"],
+    name: 'articles.order.handle',
+    path: '/articles/menus/:menuId/order',
+    method: ["PATCH"],
+    types: {} as ArticlesMenusIdOrderPatch,
+  },
+  {
+    params: ["id"],
+    name: 'articles.delete.handle',
+    path: '/articles/:id',
+    method: ["DELETE"],
+    types: {} as ArticlesIdDelete,
+  },
+  {
+    params: [],
+    name: 'api.google.autocomplete',
+    path: '/api/v1/google/places-autocomplete',
+    method: ["POST"],
+    types: {} as ApiV1GooglePlacesautocompletePost,
   },
 ] as const;
 export const api = {

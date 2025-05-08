@@ -19,6 +19,12 @@ export default class GetMenu {
   }
 
   static async #getCategories(menu: Menu) {
-    return menu.related('categories').query().preload('articles').orderBy('order')
+    return menu
+      .related('categories')
+      .query()
+      .preload('articles', (query) => {
+        query.orderBy('order')
+      })
+      .orderBy('order')
   }
 }

@@ -46,6 +46,18 @@ function onCategoryOrderChange() {
     { preserveScroll: true }
   )
 }
+
+function onArticleOrderChange() {
+  const data = categories.value.map((category) => ({
+    id: category.id,
+    articles: category.articles.map((article) => article.id),
+  }))
+  router.patch(
+    tuyau.$url('articles.order.handle', { params: { menuId: props.menu.id } }),
+    { categories: data },
+    { preserveScroll: true }
+  )
+}
 </script>
 
 <template>
@@ -98,6 +110,7 @@ function onCategoryOrderChange() {
             </DropdownMenu>
           </div>
         </div>
+        <SortableArticles v-model="categories[index]" :menu="menu" @end="onArticleOrderChange" />
       </li>
     </template>
   </Sortable>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-export type InputType = 'select' | 'textarea' | 'string' | 'password' | 'email'
+export type InputType = 'select' | 'textarea' | 'string' | 'password' | 'email' | 'number'
 
 const props = withDefaults(
   defineProps<{
@@ -12,9 +12,11 @@ const props = withDefaults(
     error?: string
     disabled?: boolean
     required?: boolean
+    step?: string
   }>(),
   {
     type: 'string',
+    step: '1',
   }
 )
 
@@ -63,6 +65,17 @@ defineExpose({
           <slot />
         </SelectContent>
       </Select>
+
+      <Input
+        v-else-if="type === 'number'"
+        v-model="internalValue"
+        ref="inputEl"
+        :type="type"
+        :disabled="disabled"
+        :required="required"
+        :placeholder="placeholder"
+        :step="step"
+      />
 
       <Input
         v-else

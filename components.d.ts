@@ -84,6 +84,7 @@ declare module 'vue' {
     SheetTitle: typeof import('./inertia/components/ui/sheet/SheetTitle.vue')['default']
     SheetTrigger: typeof import('./inertia/components/ui/sheet/SheetTrigger.vue')['default']
     Sonner: typeof import('./inertia/components/ui/sonner/Sonner.vue')['default']
+    SortableArticles: typeof import('./inertia/components/SortableArticles.vue')['default']
     SortableCategories: typeof import('./inertia/components/SortableCategories.vue')['default']
     Switch: typeof import('./inertia/components/ui/switch/Switch.vue')['default']
     Textarea: typeof import('./inertia/components/ui/textarea/Textarea.vue')['default']
