@@ -12,10 +12,7 @@ const API_URL = 'https://places.googleapis.com/v1/places/'
 export default class PlaceDetails {
   static async handle({ data }: Params) {
     const url = new URL(API_URL + data.id)
-    url.searchParams.append(
-      'fields',
-      'displayName,formattedAddress,location,internationalPhoneNumber'
-    )
+    url.searchParams.append('fields', 'displayName,formattedAddress,location,nationalPhoneNumber')
     url.searchParams.append('key', env.get('GOOGLE_API_KEY'))
 
     const res = await fetch(url)
@@ -27,7 +24,7 @@ export default class PlaceDetails {
       address: json.formattedAddress,
       lat: json.location?.latitude,
       lng: json.location?.longitude,
-      phone: json.internationalPhoneNumber?.replace(/\s+/g, ''),
+      phone: json.nationalPhoneNumber?.replace(/\s+/g, ''),
       placeId: data.id,
     }
     return dto
@@ -35,7 +32,7 @@ export default class PlaceDetails {
 }
 
 type GooglePlaceDetails = {
-  internationalPhoneNumber?: string
+  nationalPhoneNumber?: string
   formattedAddress: string
   location?: {
     latitude: number
