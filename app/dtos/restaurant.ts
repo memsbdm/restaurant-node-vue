@@ -13,6 +13,7 @@ export default class RestaurantDto extends BaseModelDto {
   declare alias: string
   declare description: string | null
   declare address: string
+  declare countryCode: string
   declare lat: number | null
   declare lng: number | null
   declare phone: string | null
@@ -35,6 +36,7 @@ export default class RestaurantDto extends BaseModelDto {
     this.alias = restaurant.alias
     this.description = restaurant.description
     this.address = restaurant.address
+    this.countryCode = restaurant.countryCode
     this.lat = restaurant.lat
     this.lng = restaurant.lng
     this.phone = restaurant.phone

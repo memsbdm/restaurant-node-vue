@@ -3,7 +3,7 @@ import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 
 type Params = {
-  id: number
+  id: string
 }
 
 @inject()

@@ -44,7 +44,7 @@ export default class RestaurantMiddleware {
 
 declare module '@adonisjs/core/http' {
   export interface HttpContext {
-    restaurantId?: number
+    restaurantId?: string
     restaurant: Restaurant
     roleId: number
   }

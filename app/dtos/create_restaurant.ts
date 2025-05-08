@@ -6,4 +6,5 @@ export type CreateRestaurantDto = {
   lng?: number
   phone?: string
   placeId: string
+  countryCode: string
 }
