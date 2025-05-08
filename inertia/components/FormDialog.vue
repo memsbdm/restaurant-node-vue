@@ -23,11 +23,11 @@ const internalOpen = computed({
       <DialogHeader>
         <slot name="title">
           <DialogTitle v-if="editing">Edit {{ resource }}</DialogTitle>
-          <DialogDescription v-if="editing">
+          <DialogDescription v-if="editing" class="hidden">
             Edit your {{ resource }} here. Click save when you're done.
           </DialogDescription>
           <DialogTitle v-if="!editing">Add {{ resource }}</DialogTitle>
-          <DialogDescription v-if="!editing">
+          <DialogDescription v-if="!editing" class="hidden">
             Fill in the details below to add a new {{ resource }}. Click save when you're done.
           </DialogDescription>
         </slot>

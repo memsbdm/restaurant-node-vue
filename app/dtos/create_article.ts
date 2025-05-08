@@ -5,6 +5,7 @@ export default class CreateArticleDto {
   declare description: string
   declare price: number | undefined
   declare categoryId: string
+  declare image: File | undefined
 
   constructor(article?: ArticleDto) {
     if (!article) return

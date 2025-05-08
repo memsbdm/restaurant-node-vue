@@ -1,3 +1,4 @@
+import StoreImage from '#actions/mailer/store_image'
 import Article from '#models/article'
 import Restaurant from '#models/restaurant'
 import { articleValidator } from '#validators/article'
@@ -16,6 +17,9 @@ export default class CreateArticle {
       priceInCents: data.price * 100,
       categoryId: data.categoryId,
       order: await this.#findNextOrder(data.categoryId),
+      imageUrl: data.image
+        ? await StoreImage.handle({ image: data.image, path: 'articles' })
+        : null,
     })
   }
 
