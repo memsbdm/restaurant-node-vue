@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.string('description').nullable()
       table.string('address').notNullable()
       table.string('country_code', 2).notNullable()
+      table.integer('currency_id').nullable().references('currencies.id')
       table.float('lat', 10, 6).nullable()
       table.float('lng', 10, 6).nullable()
       table.string('phone', 30).nullable()

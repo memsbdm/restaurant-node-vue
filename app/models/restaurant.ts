@@ -33,6 +33,9 @@ export default class Restaurant extends BaseModel {
   declare countryCode: string
 
   @column()
+  declare currencyId: number | null
+
+  @column()
   declare lat: number | null
 
   @column()

@@ -55,6 +55,14 @@ type RestaurantsIdGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/active_restaurant_controller.ts').default['handle'], false>
 }
+type RestaurantsIdCurrencyGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['render'], false>
+}
+type RestaurantsIdCurrencyPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/currency.ts')['currencyValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['handle'], true>
+}
 type MenusGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['render'], false>
@@ -170,6 +178,13 @@ export interface ApiDefinition {
       };
       '$get': RestaurantsIdGetHead;
       '$head': RestaurantsIdGetHead;
+      'currency': {
+        '$url': {
+        };
+        '$get': RestaurantsIdCurrencyGetHead;
+        '$head': RestaurantsIdCurrencyGetHead;
+        '$patch': RestaurantsIdCurrencyPatch;
+      };
     };
   };
   'menus': {
@@ -338,6 +353,20 @@ const routes = [
     path: '/restaurants/:id',
     method: ["GET","HEAD"],
     types: {} as RestaurantsIdGetHead,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.currency.render',
+    path: '/restaurants/:id/currency',
+    method: ["GET","HEAD"],
+    types: {} as RestaurantsIdCurrencyGetHead,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.currency.handle',
+    path: '/restaurants/:id/currency',
+    method: ["PATCH"],
+    types: {} as RestaurantsIdCurrencyPatch,
   },
   {
     params: [],

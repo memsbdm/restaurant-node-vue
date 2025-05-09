@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const SetRestaurantCurrencyController = () =>
+  import('#controllers/restaurants/set_restaurant_currency_controller')
 const DeleteArticleImageController = () =>
   import('#controllers/articles/delete_article_image_controller')
 const UpdateArticleOrderController = () =>
@@ -81,6 +83,8 @@ router
     router.get('/', [CreateRestaurantController, 'render']).as('create.render')
     router.post('/', [CreateRestaurantController, 'handle']).as('create.handle')
     router.get('/:id', [ActiveRestaurantController, 'handle']).as('active.handle')
+    router.get('/:id/currency', [SetRestaurantCurrencyController, 'render']).as('currency.render')
+    router.patch('/:id/currency', [SetRestaurantCurrencyController, 'handle']).as('currency.handle')
   })
   .use(middleware.auth())
   .prefix('/restaurants')

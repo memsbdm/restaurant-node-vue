@@ -31,6 +31,13 @@ export default class RestaurantMiddleware {
       ctx.session.reflash()
       return ctx.response.redirect().toRoute('restaurants.create.render')
     }
+
+    if (!ctx.restaurant.currencyId) {
+      return ctx.response.redirect().toRoute('restaurants.currency.render', {
+        id: ctx.restaurant.id,
+      })
+    }
+
     const restaurants = await user.related('restaurants').query().orderBy('name')
     ctx.inertia.share({
       restaurant: new RestaurantDto(ctx.restaurant),
