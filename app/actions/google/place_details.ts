@@ -27,7 +27,10 @@ export default class PlaceDetails {
 
     const dto: CreateRestaurantDto = {
       name: json.displayName.text,
-      alias: json.displayName.text,
+      alias:
+        json.displayName.text.length > 50
+          ? json.displayName.text.slice(0, 50)
+          : json.displayName.text,
       address: json.shortFormattedAddress,
       lat: json.location?.latitude,
       lng: json.location?.longitude,
