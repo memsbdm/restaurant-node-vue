@@ -123,6 +123,22 @@ type ArticlesIdImageDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_image_controller.ts').default['handle'], false>
 }
+type SettingsProfileGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['render'], false>
+}
+type SettingsProfilePut = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/setting.ts')['updateProfileValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['handle'], true>
+}
+type SettingsAccountGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/settings/show_account_settings_controller.ts').default['render'], false>
+}
+type SettingsAccountEmailPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/setting.ts')['updateEmailValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/settings/update_email_controller.ts').default['handle'], true>
+}
 type ApiV1GooglePlacesautocompletePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
@@ -247,6 +263,26 @@ export interface ApiDefinition {
           };
           '$patch': ArticlesMenusIdOrderPatch;
         };
+      };
+    };
+  };
+  'settings': {
+    'profile': {
+      '$url': {
+      };
+      '$get': SettingsProfileGetHead;
+      '$head': SettingsProfileGetHead;
+      '$put': SettingsProfilePut;
+    };
+    'account': {
+      '$url': {
+      };
+      '$get': SettingsAccountGetHead;
+      '$head': SettingsAccountGetHead;
+      'email': {
+        '$url': {
+        };
+        '$patch': SettingsAccountEmailPatch;
       };
     };
   };
@@ -472,6 +508,34 @@ const routes = [
     path: '/articles/:id/image',
     method: ["DELETE"],
     types: {} as ArticlesIdImageDelete,
+  },
+  {
+    params: [],
+    name: 'settings.profile.update.render',
+    path: '/settings/profile',
+    method: ["GET","HEAD"],
+    types: {} as SettingsProfileGetHead,
+  },
+  {
+    params: [],
+    name: 'settings.profile.update.handle',
+    path: '/settings/profile',
+    method: ["PUT"],
+    types: {} as SettingsProfilePut,
+  },
+  {
+    params: [],
+    name: 'settings.account.update.render',
+    path: '/settings/account',
+    method: ["GET","HEAD"],
+    types: {} as SettingsAccountGetHead,
+  },
+  {
+    params: [],
+    name: 'settings.account.update.email.handle',
+    path: '/settings/account/email',
+    method: ["PATCH"],
+    types: {} as SettingsAccountEmailPatch,
   },
   {
     params: [],

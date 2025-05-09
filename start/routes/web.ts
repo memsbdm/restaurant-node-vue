@@ -9,6 +9,10 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const UpdateEmailController = () => import('#controllers/settings/update_email_controller')
+const ShowAccountSettingsController = () =>
+  import('#controllers/settings/show_account_settings_controller')
+const UpdateProfileController = () => import('#controllers/settings/update_profile_controller')
 const SetRestaurantCurrencyController = () =>
   import('#controllers/restaurants/set_restaurant_currency_controller')
 const DeleteArticleImageController = () =>
@@ -138,3 +142,23 @@ router
   .use([middleware.auth(), middleware.restaurant()])
   .prefix('/articles')
   .as('articles')
+
+// Settings (Profile)
+router
+  .group(() => {
+    router.get('/', [UpdateProfileController, 'render']).as('update.render')
+    router.put('/', [UpdateProfileController, 'handle']).as('update.handle')
+  })
+  .use([middleware.auth(), middleware.restaurant()])
+  .prefix('/settings/profile')
+  .as('settings.profile')
+
+// Settings (Account)
+router
+  .group(() => {
+    router.get('/', [ShowAccountSettingsController, 'render']).as('update.render')
+    router.patch('/email', [UpdateEmailController, 'handle']).as('update.email.handle')
+  })
+  .use([middleware.auth(), middleware.restaurant()])
+  .prefix('/settings/account')
+  .as('settings.account')

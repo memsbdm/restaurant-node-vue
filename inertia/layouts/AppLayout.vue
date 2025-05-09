@@ -38,11 +38,11 @@ const props = defineProps<{
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem :as="Link" :href="tuyau.$url('home.render')">
+            <DropdownMenuItem :as="Link" :href="tuyau.$url('settings.profile.update.render')">
               Profile Settings
             </DropdownMenuItem>
 
-            <DropdownMenuItem :as="Link" :href="tuyau.$url('home.render')">
+            <DropdownMenuItem :as="Link" :href="tuyau.$url('settings.account.update.render')">
               Account Settings
             </DropdownMenuItem>
 

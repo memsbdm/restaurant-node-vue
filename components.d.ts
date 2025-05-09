@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AccountEmailCard: typeof import('./inertia/components/AccountEmailCard.vue')['default']
     Alert: typeof import('./inertia/components/ui/alert/Alert.vue')['default']
     AlertDescription: typeof import('./inertia/components/ui/alert/AlertDescription.vue')['default']
     AlertDialog: typeof import('./inertia/components/ui/alert-dialog/AlertDialog.vue')['default']
@@ -22,6 +23,12 @@ declare module 'vue' {
     AlertTitle: typeof import('./inertia/components/ui/alert/AlertTitle.vue')['default']
     AppHead: typeof import('./inertia/components/AppHead.vue')['default']
     Button: typeof import('./inertia/components/ui/button/Button.vue')['default']
+    Card: typeof import('./inertia/components/ui/card/Card.vue')['default']
+    CardContent: typeof import('./inertia/components/ui/card/CardContent.vue')['default']
+    CardDescription: typeof import('./inertia/components/ui/card/CardDescription.vue')['default']
+    CardFooter: typeof import('./inertia/components/ui/card/CardFooter.vue')['default']
+    CardHeader: typeof import('./inertia/components/ui/card/CardHeader.vue')['default']
+    CardTitle: typeof import('./inertia/components/ui/card/CardTitle.vue')['default']
     Checkbox: typeof import('./inertia/components/ui/checkbox/Checkbox.vue')['default']
     Combobox: typeof import('./inertia/components/ui/combobox/Combobox.vue')['default']
     ComboboxAnchor: typeof import('./inertia/components/ui/combobox/ComboboxAnchor.vue')['default']
@@ -56,6 +63,7 @@ declare module 'vue' {
     DropdownMenuSubContent: typeof import('./inertia/components/ui/dropdown-menu/DropdownMenuSubContent.vue')['default']
     DropdownMenuSubTrigger: typeof import('./inertia/components/ui/dropdown-menu/DropdownMenuSubTrigger.vue')['default']
     DropdownMenuTrigger: typeof import('./inertia/components/ui/dropdown-menu/DropdownMenuTrigger.vue')['default']
+    EmailCard: typeof import('./inertia/components/EmailCard.vue')['default']
     FormDialog: typeof import('./inertia/components/FormDialog.vue')['default']
     FormInput: typeof import('./inertia/components/FormInput.vue')['default']
     Input: typeof import('./inertia/components/ui/input/Input.vue')['default']
@@ -75,6 +83,7 @@ declare module 'vue' {
     SelectSeparator: typeof import('./inertia/components/ui/select/SelectSeparator.vue')['default']
     SelectTrigger: typeof import('./inertia/components/ui/select/SelectTrigger.vue')['default']
     SelectValue: typeof import('./inertia/components/ui/select/SelectValue.vue')['default']
+    SettingsShell: typeof import('./inertia/components/SettingsShell.vue')['default']
     Sheet: typeof import('./inertia/components/ui/sheet/Sheet.vue')['default']
     SheetClose: typeof import('./inertia/components/ui/sheet/SheetClose.vue')['default']
     SheetContent: typeof import('./inertia/components/ui/sheet/SheetContent.vue')['default']
