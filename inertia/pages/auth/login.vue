@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { tuyau } from '~/core/providers/tuyau'
 import { useForm } from '@inertiajs/vue3'
-import { AlertCircle, Loader } from 'lucide-vue-next'
+import { Loader } from 'lucide-vue-next'
 import AppHead from '~/components/AppHead.vue'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 
@@ -31,13 +31,7 @@ const form = useForm({
   </div>
 
   <form @submit.prevent="form.post(tuyau.$url('auth.login.handle'))">
-    <Alert v-if="errors?.E_INVALID_CREDENTIALS" variant="destructive" class="mb-6">
-      <AlertCircle class="w-4 h-4" />
-
-      <AlertTitle>Error</AlertTitle>
-
-      <AlertDescription>{{ errors.E_INVALID_CREDENTIALS }}</AlertDescription>
-    </Alert>
+    <InvalidCredentialsAlert :errors="errors" class="mb-6" />
 
     <div class="grid gap-3">
       <FormInput

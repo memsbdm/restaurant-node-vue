@@ -68,6 +68,7 @@ declare module 'vue' {
     FormDialog: typeof import('./inertia/components/FormDialog.vue')['default']
     FormInput: typeof import('./inertia/components/FormInput.vue')['default']
     Input: typeof import('./inertia/components/ui/input/Input.vue')['default']
+    InvalidCredentialsAlert: typeof import('./inertia/components/InvalidCredentialsAlert.vue')['default']
     Label: typeof import('./inertia/components/ui/label/Label.vue')['default']
     MenuActions: typeof import('./inertia/components/MenuActions.vue')['default']
     Navigation: typeof import('./inertia/components/Navigation.vue')['default']

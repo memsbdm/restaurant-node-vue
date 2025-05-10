@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
 import { tuyau } from '~/core/providers/tuyau'
-import { AlertCircle, Loader } from 'lucide-vue-next'
+import { Loader } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 defineProps<{
@@ -29,13 +29,7 @@ function handleFormSubmit() {
 
     <CardContent>
       <form id="accountDeleteForm" class="grid gap-4" @submit.prevent="handleFormSubmit">
-        <Alert v-if="formSent && errors?.E_INVALID_CREDENTIALS" variant="destructive" class="mb-3">
-          <AlertCircle class="w-4 h-4" />
-
-          <AlertTitle>Error</AlertTitle>
-
-          <AlertDescription>{{ errors.E_INVALID_CREDENTIALS }}</AlertDescription>
-        </Alert>
+        <InvalidCredentialsAlert v-if="formSent" :errors="errors" />
 
         <FormInput
           v-model="form.password"
