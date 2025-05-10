@@ -139,6 +139,10 @@ type SettingsAccountEmailPatch = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/setting.ts')['updateEmailValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/settings/update_email_controller.ts').default['handle'], true>
 }
+type SettingsAccountDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/settings/delete_account_controller.ts').default['handle'], false>
+}
 type ApiV1GooglePlacesautocompletePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
@@ -284,6 +288,7 @@ export interface ApiDefinition {
         };
         '$patch': SettingsAccountEmailPatch;
       };
+      '$delete': SettingsAccountDelete;
     };
   };
   'api': {
@@ -536,6 +541,13 @@ const routes = [
     path: '/settings/account/email',
     method: ["PATCH"],
     types: {} as SettingsAccountEmailPatch,
+  },
+  {
+    params: [],
+    name: 'settings.account.delete.handle',
+    path: '/settings/account',
+    method: ["DELETE"],
+    types: {} as SettingsAccountDelete,
   },
   {
     params: [],

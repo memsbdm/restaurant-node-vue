@@ -40,6 +40,7 @@ declare module 'vue' {
     ComboboxSeparator: typeof import('./inertia/components/ui/combobox/ComboboxSeparator.vue')['default']
     ComboboxTrigger: typeof import('./inertia/components/ui/combobox/ComboboxTrigger.vue')['default']
     ConfirmDestroyDialog: typeof import('./inertia/components/ConfirmDestroyDialog.vue')['default']
+    DeleteAccountCard: typeof import('./inertia/components/DeleteAccountCard.vue')['default']
     Dialog: typeof import('./inertia/components/ui/dialog/Dialog.vue')['default']
     DialogClose: typeof import('./inertia/components/ui/dialog/DialogClose.vue')['default']
     DialogContent: typeof import('./inertia/components/ui/dialog/DialogContent.vue')['default']

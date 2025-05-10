@@ -12,5 +12,6 @@ defineProps<{
 
   <SettingsShell>
     <AccountEmailCard :email="user.email" :errors />
+    <DeleteAccountCard :errors />
   </SettingsShell>
 </template>
