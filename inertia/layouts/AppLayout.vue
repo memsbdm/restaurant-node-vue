@@ -46,7 +46,7 @@ const props = defineProps<{
               Account Settings
             </DropdownMenuItem>
 
-            <DropdownMenuItem :as="Link" :href="tuyau.$url('home.render')">
+            <DropdownMenuItem :as="Link" :href="tuyau.$url('settings.restaurant.update.render')">
               Restaurant Settings
             </DropdownMenuItem>
 

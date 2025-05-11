@@ -64,6 +64,7 @@ declare module 'vue' {
     DropdownMenuSubContent: typeof import('./inertia/components/ui/dropdown-menu/DropdownMenuSubContent.vue')['default']
     DropdownMenuSubTrigger: typeof import('./inertia/components/ui/dropdown-menu/DropdownMenuSubTrigger.vue')['default']
     DropdownMenuTrigger: typeof import('./inertia/components/ui/dropdown-menu/DropdownMenuTrigger.vue')['default']
+    EditRestaurantCard: typeof import('./inertia/components/EditRestaurantCard.vue')['default']
     EmailCard: typeof import('./inertia/components/EmailCard.vue')['default']
     FormDialog: typeof import('./inertia/components/FormDialog.vue')['default']
     FormInput: typeof import('./inertia/components/FormInput.vue')['default']

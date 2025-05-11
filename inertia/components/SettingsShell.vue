@@ -29,7 +29,11 @@ import { Link } from '@inertiajs/vue3'
           Account
         </Link>
 
-        <Link href="/" class="link" :class="{ active: $page.component === 'settings/restaurant' }">
+        <Link
+          :href="tuyau.$url('settings.restaurant.update.render')"
+          class="link"
+          :class="{ active: $page.component === 'settings/restaurant' }"
+        >
           Restaurant
         </Link>
       </nav>

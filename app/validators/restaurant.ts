@@ -25,3 +25,14 @@ export const createRestaurantValidator = vine.compile(
     }),
   })
 )
+
+export const updateRestaurantValidator = vine.compile(
+  vine.object({
+    alias: vine.string().maxLength(30),
+    phone: vine
+      .string()
+      .nullable()
+      .transform((input) => input?.replace(/\s+/g, '')),
+    description: vine.string().nullable(),
+  })
+)

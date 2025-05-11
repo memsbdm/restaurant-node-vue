@@ -34,7 +34,7 @@ function onSubmit() {
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <Button variant="ghost">{{ restaurant.name }}<ChevronsUpDown class="w-4 h-4 ml-2" /></Button>
+      <Button variant="ghost">{{ restaurant.alias }}<ChevronsUpDown class="w-4 h-4 ml-2" /></Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent>
       <DropdownMenuLabel>Your Restaurants ({{ restaurants.length }})</DropdownMenuLabel>
@@ -47,14 +47,14 @@ function onSubmit() {
           :key="rest.id"
           :value="rest.id.toString()"
         >
-          {{ rest.name }}
+          {{ rest.alias }}
         </DropdownMenuRadioItem>
       </DropdownMenuRadioGroup>
 
       <DropdownMenuSeparator />
 
-      <DropdownMenuItem @click="router.get(tuyau.$url('home.render'))">
-        Edit {{ restaurant.name }}
+      <DropdownMenuItem @click="router.get(tuyau.$url('settings.restaurant.update.render'))">
+        Edit {{ restaurant.alias }}
       </DropdownMenuItem>
       <DropdownMenuItem @click="dialog.open()">Add Restaurant</DropdownMenuItem>
     </DropdownMenuContent>

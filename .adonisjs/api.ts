@@ -63,6 +63,14 @@ type RestaurantsIdCurrencyPatch = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/currency.ts')['currencyValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['handle'], true>
 }
+type RestaurantsIdPut = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['updateRestaurantValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/update_restaurant_controller.ts').default['handle'], true>
+}
+type RestaurantsIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/delete_restaurant_controller.ts').default['handle'], false>
+}
 type MenusGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['render'], false>
@@ -143,6 +151,10 @@ type SettingsAccountDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/settings/delete_account_controller.ts').default['handle'], false>
 }
+type SettingsRestaurantGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/update_restaurant_controller.ts').default['render'], false>
+}
 type ApiV1GooglePlacesautocompletePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
@@ -205,6 +217,8 @@ export interface ApiDefinition {
         '$head': RestaurantsIdCurrencyGetHead;
         '$patch': RestaurantsIdCurrencyPatch;
       };
+      '$put': RestaurantsIdPut;
+      '$delete': RestaurantsIdDelete;
     };
   };
   'menus': {
@@ -289,6 +303,12 @@ export interface ApiDefinition {
         '$patch': SettingsAccountEmailPatch;
       };
       '$delete': SettingsAccountDelete;
+    };
+    'restaurant': {
+      '$url': {
+      };
+      '$get': SettingsRestaurantGetHead;
+      '$head': SettingsRestaurantGetHead;
     };
   };
   'api': {
@@ -408,6 +428,20 @@ const routes = [
     path: '/restaurants/:id/currency',
     method: ["PATCH"],
     types: {} as RestaurantsIdCurrencyPatch,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.update.handle',
+    path: '/restaurants/:id',
+    method: ["PUT"],
+    types: {} as RestaurantsIdPut,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.delete.handle',
+    path: '/restaurants/:id',
+    method: ["DELETE"],
+    types: {} as RestaurantsIdDelete,
   },
   {
     params: [],
@@ -548,6 +582,13 @@ const routes = [
     path: '/settings/account',
     method: ["DELETE"],
     types: {} as SettingsAccountDelete,
+  },
+  {
+    params: [],
+    name: 'settings.restaurant.update.render',
+    path: '/settings/restaurant',
+    method: ["GET","HEAD"],
+    types: {} as SettingsRestaurantGetHead,
   },
   {
     params: [],
