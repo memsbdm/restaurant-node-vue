@@ -1,4 +1,5 @@
 import DeleteImage from '#actions/mailer/delete_image'
+import type Article from '#models/article'
 import Restaurant from '#models/restaurant'
 
 type Params = {
@@ -15,5 +16,16 @@ export default class DeleteArticleImage {
     }
 
     return article
+  }
+
+  static handleArray(articles: Article[]) {
+    const promises = articles.map(({ imageUrl }) => {
+      if (!imageUrl) {
+        return
+      }
+      return DeleteImage.handle({ fileUrl: imageUrl })
+    })
+
+    return Promise.all(promises)
   }
 }

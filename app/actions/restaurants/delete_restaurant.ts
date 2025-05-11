@@ -1,3 +1,4 @@
+import DeleteArticleImage from '#actions/articles/delete_article_image'
 import type User from '#models/user'
 
 type Params = {
@@ -13,7 +14,9 @@ export default class DeleteRestaurant {
       .where('restaurants.id', id)
       .firstOrFail()
 
+    const articles = await restaurant.related('articles').query()
     await restaurant.delete()
+    await DeleteArticleImage.handleArray(articles)
 
     return restaurant
   }
