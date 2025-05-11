@@ -2,7 +2,7 @@
 import RestaurantInviteDto from '#dtos/restaurant_invite'
 import RoleDto from '#dtos/role'
 import { Role } from '#enums/role'
-import { useForm } from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
 import { tuyau } from '~/core/providers/tuyau'
 
@@ -46,7 +46,21 @@ function getRoleName(roleId: number) {
           <TableRow v-for="invite in invites" :key="invite.id">
             <TableCell>{{ invite.email }}</TableCell>
             <TableCell>{{ getRoleName(invite.roleId) }}</TableCell>
-            <TableCell></TableCell>
+            <TableCell>
+              <Link
+                :href="
+                  tuyau.$url('settings.restaurant.cancel.invite.handle', {
+                    params: { id: invite.id },
+                  })
+                "
+                as="button"
+                method="delete"
+                class="text-red-500"
+                preserve-scroll
+              >
+                Cancel Invite
+              </Link>
+            </TableCell>
           </TableRow>
           <TableRow v-if="!invites?.length">
             <TableCell colspan="3">

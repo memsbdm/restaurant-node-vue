@@ -163,6 +163,10 @@ type SettingsRestaurantInvitePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['restaurantInviteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/restaurants/invite_user_controller.ts').default['handle'], true>
 }
+type SettingsRestaurantInvitesIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/cancel_restaurant_invite_controller.ts').default['handle'], false>
+}
 type ApiV1GooglePlacesautocompletePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
@@ -331,6 +335,13 @@ export interface ApiDefinition {
         '$url': {
         };
         '$post': SettingsRestaurantInvitePost;
+      };
+      'invites': {
+        ':id': {
+          '$url': {
+          };
+          '$delete': SettingsRestaurantInvitesIdDelete;
+        };
       };
     };
   };
@@ -626,6 +637,13 @@ const routes = [
     path: '/settings/restaurant/invite',
     method: ["POST"],
     types: {} as SettingsRestaurantInvitePost,
+  },
+  {
+    params: ["id"],
+    name: 'settings.restaurant.cancel.invite.handle',
+    path: '/settings/restaurant/invites/:id',
+    method: ["DELETE"],
+    types: {} as SettingsRestaurantInvitesIdDelete,
   },
   {
     params: [],
