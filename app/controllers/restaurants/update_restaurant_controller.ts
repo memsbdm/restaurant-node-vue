@@ -1,10 +1,23 @@
+import GetRestaurantUsers from '#actions/restaurants/get_restaurant_users'
 import UpdateRestaurant from '#actions/restaurants/update_restaurant'
+import RoleDto from '#dtos/role'
+import UserDto from '#dtos/user'
+import Role from '#models/role'
 import { updateRestaurantValidator } from '#validators/restaurant'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UpdateRestaurantController {
-  render({ inertia }: HttpContext) {
-    return inertia.render('settings/restaurant')
+  render({ inertia, restaurant }: HttpContext) {
+    return inertia.render('settings/restaurant', {
+      users: async () => {
+        const users = await GetRestaurantUsers.handle({ restaurant })
+        return UserDto.fromArray(users)
+      },
+      roles: async () => {
+        const roles = await Role.query().orderBy('name')
+        return RoleDto.fromArray(roles)
+      },
+    })
   }
 
   async handle({ params, request, response, auth, session }: HttpContext) {

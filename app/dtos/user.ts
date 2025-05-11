@@ -13,6 +13,8 @@ export default class UserDto extends BaseModelDto {
   declare passwordResetTokens: PasswordResetTokenDto[]
   declare verifyEmailTokens: VerifyEmailTokenDto[]
 
+  declare meta: Record<string, any>
+
   constructor(user?: User) {
     super()
 
@@ -25,5 +27,7 @@ export default class UserDto extends BaseModelDto {
     this.isVerified = user.isVerified
     this.passwordResetTokens = PasswordResetTokenDto.fromArray(user.passwordResetTokens)
     this.verifyEmailTokens = VerifyEmailTokenDto.fromArray(user.verifyEmailTokens)
+
+    this.meta = user.$extras
   }
 }
