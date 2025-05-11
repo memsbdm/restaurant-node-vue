@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type RestaurantDto from '#dtos/restaurant'
+import type RestaurantInviteDto from '#dtos/restaurant_invite'
 import type RoleDto from '#dtos/role'
 import type UserDto from '#dtos/user'
 
@@ -8,6 +9,7 @@ defineProps<{
   user: UserDto
   users: UserDto[]
   roles: RoleDto[]
+  invites: RestaurantInviteDto[]
 }>()
 </script>
 
@@ -17,5 +19,6 @@ defineProps<{
   <SettingsShell>
     <EditRestaurantCard :restaurant="restaurant" />
     <RestaurantUsersCard :user="user" :users="users" :roles="roles" />
+    <RestaurantUserInvitesCard :invites="invites" :roles="roles" />
   </SettingsShell>
 </template>

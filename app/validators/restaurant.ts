@@ -1,4 +1,6 @@
 import vine from '@vinejs/vine'
+import { emailRule } from './auth.js'
+import { RestaurantMetaData } from './helpers/restaurant.js'
 
 export const createRestaurantValidator = vine.compile(
   vine.object({
@@ -34,5 +36,37 @@ export const updateRestaurantValidator = vine.compile(
       .nullable()
       .transform((input) => input?.replace(/\s+/g, '')),
     description: vine.string().nullable(),
+  })
+)
+
+export const restaurantInviteValidator = vine.withMetaData<RestaurantMetaData>().compile(
+  vine.object({
+    email: emailRule.clone().unique(async (db, value, field) => {
+      const inviteMatch = await db
+        .from('restaurant_invites')
+        .where('restaurant_id', field.meta.restaurantId)
+        .where('email', value)
+        .whereNull('accepted_at')
+        .whereNull('canceled_at')
+        .select('id')
+        .first()
+
+      if (inviteMatch) return false
+
+      const restaurantMatch = await db
+        .from('restaurant_users')
+        .join('users', 'restaurant_users.user_id', 'users.id')
+        .where('restaurant_users.restaurant_id', field.meta.restaurantId)
+        .where('users.email', value)
+        .select('users.id')
+        .first()
+
+      return !restaurantMatch
+    }),
+
+    roleId: vine.number().exists(async (db, value) => {
+      const match = await db.from('roles').where('id', value).select('id').first()
+      return !!match
+    }),
   })
 )

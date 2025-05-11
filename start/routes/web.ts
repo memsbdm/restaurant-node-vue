@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const AcceptInvitationController = () => import('#controllers/restaurants/accept_invite_controller')
+const InviteUserController = () => import('#controllers/restaurants/invite_user_controller')
 const UpdateRestaurantController = () =>
   import('#controllers/restaurants/update_restaurant_controller')
 const DeleteRestaurantController = () =>
@@ -101,6 +103,10 @@ router
   .prefix('/restaurants')
   .as('restaurants')
 
+router
+  .get('/restaurants/invites/:id/accept', [AcceptInvitationController, 'handle'])
+  .as('restaurants.accept.invitation.handle')
+
 // Menus
 router
   .group(() => {
@@ -175,6 +181,7 @@ router
 router
   .group(() => {
     router.get('/', [UpdateRestaurantController, 'render']).as('update.render')
+    router.post('/invite', [InviteUserController, 'handle']).as('invite.user.handle')
   })
   .use([middleware.auth(), middleware.restaurant()])
   .prefix('/settings/restaurant')

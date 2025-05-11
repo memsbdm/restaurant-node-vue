@@ -4,12 +4,17 @@ import { Loader } from 'lucide-vue-next'
 import { tuyau } from '~/core/providers/tuyau'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 import AppHead from '~/components/AppHead.vue'
+import type RestaurantInviteDto from '#dtos/restaurant_invite'
 
 defineOptions({ layout: AuthLayout })
 
+const props = defineProps<{
+  invite?: RestaurantInviteDto
+}>()
+
 const form = useForm({
   fullName: '',
-  email: '',
+  email: props.invite?.email ?? '',
   password: '',
 })
 </script>
@@ -43,7 +48,7 @@ const form = useForm({
       type="email"
       v-model="form.email"
       :error="form.errors.email"
-      :disabled="form.processing"
+      :disabled="form.processing || !!invite"
       required
     />
 

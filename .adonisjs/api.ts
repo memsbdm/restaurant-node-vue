@@ -71,6 +71,10 @@ type RestaurantsIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/delete_restaurant_controller.ts').default['handle'], false>
 }
+type RestaurantsInvitesIdAcceptGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/accept_invite_controller.ts').default['handle'], false>
+}
 type MenusGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['render'], false>
@@ -155,6 +159,10 @@ type SettingsRestaurantGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/update_restaurant_controller.ts').default['render'], false>
 }
+type SettingsRestaurantInvitePost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['restaurantInviteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/invite_user_controller.ts').default['handle'], true>
+}
 type ApiV1GooglePlacesautocompletePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
@@ -219,6 +227,16 @@ export interface ApiDefinition {
       };
       '$put': RestaurantsIdPut;
       '$delete': RestaurantsIdDelete;
+    };
+    'invites': {
+      ':id': {
+        'accept': {
+          '$url': {
+          };
+          '$get': RestaurantsInvitesIdAcceptGetHead;
+          '$head': RestaurantsInvitesIdAcceptGetHead;
+        };
+      };
     };
   };
   'menus': {
@@ -309,6 +327,11 @@ export interface ApiDefinition {
       };
       '$get': SettingsRestaurantGetHead;
       '$head': SettingsRestaurantGetHead;
+      'invite': {
+        '$url': {
+        };
+        '$post': SettingsRestaurantInvitePost;
+      };
     };
   };
   'api': {
@@ -442,6 +465,13 @@ const routes = [
     path: '/restaurants/:id',
     method: ["DELETE"],
     types: {} as RestaurantsIdDelete,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.accept.invitation.handle',
+    path: '/restaurants/invites/:id/accept',
+    method: ["GET","HEAD"],
+    types: {} as RestaurantsInvitesIdAcceptGetHead,
   },
   {
     params: [],
@@ -589,6 +619,13 @@ const routes = [
     path: '/settings/restaurant',
     method: ["GET","HEAD"],
     types: {} as SettingsRestaurantGetHead,
+  },
+  {
+    params: [],
+    name: 'settings.restaurant.invite.user.handle',
+    path: '/settings/restaurant/invite',
+    method: ["POST"],
+    types: {} as SettingsRestaurantInvitePost,
   },
   {
     params: [],
