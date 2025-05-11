@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { tuyau } from '~/core/providers/tuyau'
+import { Link } from '@inertiajs/vue3'
 import type RoleDto from '#dtos/role'
 import type UserDto from '#dtos/user'
 
@@ -40,7 +42,21 @@ function getRoleName(roleId: number) {
             <TableCell>
               {{ getRoleName(member.meta.pivot_role_id) }}
             </TableCell>
-            <TableCell></TableCell>
+            <TableCell>
+              <Link
+                :href="
+                  tuyau.$url('settings.restaurant.remove.user.handle', {
+                    params: { id: member.id },
+                  })
+                "
+                method="delete"
+                class="text-red-500"
+                preserve-scroll
+                as="button"
+              >
+                Remove
+              </Link>
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

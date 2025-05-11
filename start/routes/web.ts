@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const RemoveRestaurantUserController = () =>
+  import('#controllers/settings/remove_restaurant_user_controller')
 const CancelRestaurantInviteController = () =>
   import('#controllers/restaurants/cancel_restaurant_invite_controller')
 const AcceptInvitationController = () => import('#controllers/restaurants/accept_invite_controller')
@@ -187,6 +189,7 @@ router
     router
       .delete('/invites/:id', [CancelRestaurantInviteController, 'handle'])
       .as('cancel.invite.handle')
+    router.delete('/user/:id', [RemoveRestaurantUserController, 'handle']).as('remove.user.handle')
   })
   .use([middleware.auth(), middleware.restaurant()])
   .prefix('/settings/restaurant')

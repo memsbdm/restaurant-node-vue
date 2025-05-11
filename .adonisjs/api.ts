@@ -167,6 +167,10 @@ type SettingsRestaurantInvitesIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/cancel_restaurant_invite_controller.ts').default['handle'], false>
 }
+type SettingsRestaurantUserIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/settings/remove_restaurant_user_controller.ts').default['handle'], false>
+}
 type ApiV1GooglePlacesautocompletePost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/google.ts')['placeAutocompleteValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/google/place_autocomplete_controller.ts').default['handle'], true>
@@ -341,6 +345,13 @@ export interface ApiDefinition {
           '$url': {
           };
           '$delete': SettingsRestaurantInvitesIdDelete;
+        };
+      };
+      'user': {
+        ':id': {
+          '$url': {
+          };
+          '$delete': SettingsRestaurantUserIdDelete;
         };
       };
     };
@@ -644,6 +655,13 @@ const routes = [
     path: '/settings/restaurant/invites/:id',
     method: ["DELETE"],
     types: {} as SettingsRestaurantInvitesIdDelete,
+  },
+  {
+    params: ["id"],
+    name: 'settings.restaurant.remove.user.handle',
+    path: '/settings/restaurant/user/:id',
+    method: ["DELETE"],
+    types: {} as SettingsRestaurantUserIdDelete,
   },
   {
     params: [],
