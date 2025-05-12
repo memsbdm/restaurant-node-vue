@@ -9,7 +9,7 @@ import { SimpleMessagesProvider } from '@vinejs/vine'
 @inject()
 export default class InviteUserController {
   async handle({ auth, can, request, response, restaurant, session }: HttpContext) {
-    if (!can.restaurant.canManageUsers) {
+    if (!can.restaurant.manageUsers) {
       throw new ForbiddenException('You are not allowed to invite users')
     }
 

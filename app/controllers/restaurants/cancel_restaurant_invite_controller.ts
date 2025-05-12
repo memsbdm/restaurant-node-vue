@@ -4,7 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class CancelRestaurantInviteController {
   async handle({ can, params, response, auth, session, restaurant }: HttpContext) {
-    if (!can.restaurant.canManageUsers) {
+    if (!can.restaurant.manageUsers) {
       throw new ForbiddenException('You are not allowed to cancel invitations')
     }
 

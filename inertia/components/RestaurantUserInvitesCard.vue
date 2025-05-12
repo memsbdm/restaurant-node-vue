@@ -5,10 +5,12 @@ import { Role } from '#enums/role'
 import { Link, useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
 import { tuyau } from '~/core/providers/tuyau'
+import { type Abilities } from '#actions/abilities/get_abilities'
 
 const props = defineProps<{
   invites: RestaurantInviteDto[]
   roles: RoleDto[]
+  can: Abilities
 }>()
 
 const inviteForm = useForm({
@@ -39,14 +41,14 @@ function getRoleName(roleId: number) {
           <TableRow>
             <TableHead>Email</TableHead>
             <TableHead>Role</TableHead>
-            <TableHead></TableHead>
+            <TableHead v-if="can.restaurant.manageUsers"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow v-for="invite in invites" :key="invite.id">
             <TableCell>{{ invite.email }}</TableCell>
             <TableCell>{{ getRoleName(invite.roleId) }}</TableCell>
-            <TableCell>
+            <TableCell v-if="can.restaurant.manageUsers">
               <Link
                 :href="
                   tuyau.$url('settings.restaurant.cancel.invite.handle', {
@@ -70,7 +72,7 @@ function getRoleName(roleId: number) {
         </TableBody>
       </Table>
 
-      <div class="p-4 rounded bg-slate-100 mt-8">
+      <div v-if="can.restaurant.manageUsers" class="p-4 rounded bg-slate-100 mt-8">
         <h4 class="font-bold">Invite New Member</h4>
         <div class="text-slate-400 text-sm mb-3">Invite a new member to your restaurant.</div>
 

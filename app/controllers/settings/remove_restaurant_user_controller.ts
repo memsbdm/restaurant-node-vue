@@ -8,7 +8,7 @@ export default class RemoveRestaurantUserController {
   async handle({ auth, can, response, restaurant, session, params }: HttpContext) {
     const user = auth.use('web').user!
 
-    if (!can.restaurant.canManageUsers && params.id !== user.id) {
+    if (!can.restaurant.manageUsers && params.id !== user.id) {
       throw new ForbiddenException('You are not allowed to remove users')
     }
 

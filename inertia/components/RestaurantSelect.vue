@@ -7,10 +7,12 @@ import { tuyau } from '~/core/providers/tuyau'
 import FormDialog from './FormDialog.vue'
 import { watchEffect } from 'vue'
 import { useResourceActions } from '~/composables/resource_actions'
+import type { Abilities } from '#actions/abilities/get_abilities'
 
 const props = defineProps<{
   restaurant: RestaurantDto
   restaurants: RestaurantDto[]
+  can: Abilities
 }>()
 
 const restaurantId = ref(props.restaurant.id.toString())
@@ -53,7 +55,10 @@ function onSubmit() {
 
       <DropdownMenuSeparator />
 
-      <DropdownMenuItem @click="router.get(tuyau.$url('settings.restaurant.update.render'))">
+      <DropdownMenuItem
+        v-if="can.restaurant.edit"
+        @click="router.get(tuyau.$url('settings.restaurant.update.render'))"
+      >
         Edit {{ restaurant.alias }}
       </DropdownMenuItem>
       <DropdownMenuItem @click="dialog.open()">Add Restaurant</DropdownMenuItem>

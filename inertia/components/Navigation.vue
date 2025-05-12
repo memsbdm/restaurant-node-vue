@@ -3,12 +3,14 @@ import { Menu, Slash, Route } from 'lucide-vue-next'
 import type RestaurantDto from '#dtos/restaurant'
 import type UserDto from '#dtos/user'
 import type { Toast } from '~/components/ToastManager.vue'
+import type { Abilities } from '#actions/abilities/get_abilities'
 
 defineProps<{
   user: UserDto
   messages: Record<string, Toast>
   restaurant: RestaurantDto
   restaurants: RestaurantDto[]
+  can: Abilities
 }>()
 </script>
 
@@ -23,7 +25,7 @@ defineProps<{
     <div class="flex items-center">
       <Slash class="text-slate-300 w-4 h-4 -rotate-12" />
 
-      <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" />
+      <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" :can />
 
       <Slash class="text-slate-300 w-4 h-4 -rotate-12" />
     </div>
@@ -54,7 +56,7 @@ defineProps<{
           <span class="sr-only">Restaurant App</span>
         </Link>
 
-        <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" />
+        <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" :can />
 
         <Link
           route="menus.create.render"

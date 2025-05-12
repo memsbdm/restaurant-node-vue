@@ -5,17 +5,17 @@ type Params = {
 }
 
 export type RestaurantAbilities = {
-  canEdit: boolean
-  canDestroy: boolean
-  canManageUsers: boolean
+  edit: boolean
+  destroy: boolean
+  manageUsers: boolean
 }
 
 export default class GetRestaurantAbilities {
   static handle({ roleId }: Params): RestaurantAbilities {
     return {
-      canEdit: this.canEdit(roleId),
-      canDestroy: this.canDestroy(roleId),
-      canManageUsers: this.canManageUsers(roleId),
+      edit: this.canEdit(roleId),
+      destroy: this.canDestroy(roleId),
+      manageUsers: this.canManageUsers(roleId),
     }
   }
 

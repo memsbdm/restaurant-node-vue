@@ -3,8 +3,14 @@ import { tuyau } from '~/core/providers/tuyau'
 import { Link } from '@inertiajs/vue3'
 import type RoleDto from '#dtos/role'
 import type UserDto from '#dtos/user'
+import { type Abilities } from '#actions/abilities/get_abilities'
 
-const props = defineProps<{ users: UserDto[]; user: UserDto; roles: RoleDto[] }>()
+const props = defineProps<{
+  users: UserDto[]
+  user: UserDto
+  roles: RoleDto[]
+  can: Abilities
+}>()
 
 function getRoleName(roleId: number) {
   return props.roles.find((role) => role.id === roleId)?.name
@@ -44,6 +50,7 @@ function getRoleName(roleId: number) {
             </TableCell>
             <TableCell>
               <Link
+                v-if="can.restaurant.manageUsers || user.id === member.id"
                 :href="
                   tuyau.$url('settings.restaurant.remove.user.handle', {
                     params: { id: member.id },
