@@ -43,7 +43,6 @@ const ActiveMenuController = () => import('#controllers/menus/active_menu_contro
 const ActiveRestaurantController = () =>
   import('#controllers/restaurants/active_restaurant_controller')
 const ForgotPasswordController = () => import('#controllers/auth/forgot_password_controller')
-const HomeController = () => import('#controllers/home_controller')
 const LoginController = () => import('#controllers/auth/login_controller')
 const RegisterController = () => import('#controllers/auth/register_controller')
 const LogoutController = () => import('#controllers/auth/logout_controller')
@@ -54,10 +53,7 @@ const UpdateMenuController = () => import('#controllers/menus/update_menu_contro
 const ShowMenuController = () => import('#controllers/menus/show_menu_controller')
 
 // Landing page
-router
-  .get('/', [HomeController, 'render'])
-  .use([middleware.auth(), middleware.restaurant()])
-  .as('home.render')
+router.on('/').render('pages/landing').as('landing')
 
 // Auth
 router

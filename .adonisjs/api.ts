@@ -47,10 +47,6 @@ type RestaurantsGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['render'], false>
 }
-type RestaurantsPost = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['createRestaurantValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'], true>
-}
 type RestaurantsIdGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/active_restaurant_controller.ts').default['handle'], false>
@@ -59,13 +55,17 @@ type RestaurantsIdCurrencyGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['render'], false>
 }
-type RestaurantsIdCurrencyPatch = {
-  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/currency.ts')['currencyValidator']>>
-  response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['handle'], true>
+type RestaurantsPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['createRestaurantValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'], true>
 }
 type RestaurantsIdPut = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['updateRestaurantValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/restaurants/update_restaurant_controller.ts').default['handle'], true>
+}
+type RestaurantsIdCurrencyPatch = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/currency.ts')['currencyValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['handle'], true>
 }
 type RestaurantsIdDelete = {
   request: unknown
@@ -220,7 +220,6 @@ export interface ApiDefinition {
     };
     '$get': RestaurantsGetHead;
     '$head': RestaurantsGetHead;
-    '$post': RestaurantsPost;
     ':id': {
       '$url': {
       };
@@ -236,6 +235,7 @@ export interface ApiDefinition {
       '$put': RestaurantsIdPut;
       '$delete': RestaurantsIdDelete;
     };
+    '$post': RestaurantsPost;
     'invites': {
       ':id': {
         'accept': {
@@ -371,7 +371,7 @@ export interface ApiDefinition {
 const routes = [
   {
     params: [],
-    name: 'home.render',
+    name: 'landing',
     path: '/',
     method: ["GET","HEAD"],
     types: {} as unknown,
@@ -447,13 +447,6 @@ const routes = [
     types: {} as RestaurantsGetHead,
   },
   {
-    params: [],
-    name: 'restaurants.create.handle',
-    path: '/restaurants',
-    method: ["POST"],
-    types: {} as RestaurantsPost,
-  },
-  {
     params: ["id"],
     name: 'restaurants.active.handle',
     path: '/restaurants/:id',
@@ -468,11 +461,11 @@ const routes = [
     types: {} as RestaurantsIdCurrencyGetHead,
   },
   {
-    params: ["id"],
-    name: 'restaurants.currency.handle',
-    path: '/restaurants/:id/currency',
-    method: ["PATCH"],
-    types: {} as RestaurantsIdCurrencyPatch,
+    params: [],
+    name: 'restaurants.create.handle',
+    path: '/restaurants',
+    method: ["POST"],
+    types: {} as RestaurantsPost,
   },
   {
     params: ["id"],
@@ -480,6 +473,13 @@ const routes = [
     path: '/restaurants/:id',
     method: ["PUT"],
     types: {} as RestaurantsIdPut,
+  },
+  {
+    params: ["id"],
+    name: 'restaurants.currency.handle',
+    path: '/restaurants/:id/currency',
+    method: ["PATCH"],
+    types: {} as RestaurantsIdCurrencyPatch,
   },
   {
     params: ["id"],

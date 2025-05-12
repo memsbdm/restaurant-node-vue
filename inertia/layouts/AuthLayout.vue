@@ -13,7 +13,7 @@ defineProps<{
     <header>
       <nav class="flex items-center justify-between p-6 lg:px-8">
         <div class="flex lg:flex-1">
-          <Link route="home.render" class="p-1.5 -m-1.5">
+          <a href="/" class="p-1.5 -m-1.5">
             <span class="sr-only">Home page</span>
 
             <svg
@@ -34,7 +34,7 @@ defineProps<{
 
               <circle cx="18" cy="5" r="3" />
             </svg>
-          </Link>
+          </a>
         </div>
 
         <div v-if="!user" class="flex flex-1 justify-end gap-4">
