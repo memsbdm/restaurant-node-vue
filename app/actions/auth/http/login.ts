@@ -14,16 +14,18 @@ type Params = {
 export default class Login {
   constructor(protected ctx: HttpContext) {}
 
-  async handle({ data }: Params) {
-    const limit = limiter.use({
+  get limit() {
+    return limiter.use({
       requests: 3,
       duration: '3 hours',
       blockDuration: '24 hours',
     })
+  }
 
-    const key = `login_${this.ctx.request.ip()}_${data.email}`
+  async handle({ data }: Params) {
+    const key = this.#getRateKey(data.email)
 
-    const [error, user] = await limit.penalize(key, async () => {
+    const [error, user] = await this.limit.penalize(key, async () => {
       return User.verifyCredentials(data.email, data.password)
     })
 
@@ -43,6 +45,10 @@ export default class Login {
     return { user }
   }
 
+  async clearRateLimits(email: string) {
+    await this.limit.delete(this.#getRateKey(email))
+  }
+
   async #checkForRestaurantInvite(user: User) {
     const inviteId = this.ctx.session.get('invite_id')
 
@@ -55,5 +61,9 @@ export default class Login {
 
     this.ctx.session.forget('invite_id')
     this.ctx.session.flash(result.state, result.message)
+  }
+
+  #getRateKey(email: string) {
+    return `login_${this.ctx.request.ip()}_${email}`
   }
 }

@@ -3,6 +3,8 @@ import TrySendPasswordResetEmail from '#actions/auth/password_reset/try_send_pas
 import VerifyPasswordResetToken from '#actions/auth/password_reset/verify_password_reset_token'
 import { passwordResetSendValidator, passwordResetValidator } from '#validators/auth'
 import type { HttpContext } from '@adonisjs/core/http'
+import { inject } from '@adonisjs/core'
+import Login from '#actions/auth/http/login'
 
 export default class ForgotPasswordController {
   #sentSessionKey = 'FORGOT_PASSWORD_SENT'
@@ -33,10 +35,12 @@ export default class ForgotPasswordController {
     })
   }
 
-  async update({ auth, request, response, session }: HttpContext) {
+  @inject()
+  async update({ auth, request, response, session }: HttpContext, login: Login) {
     const data = await request.validateUsing(passwordResetValidator)
     const user = await ResetPassword.handle({ data })
 
+    await login.clearRateLimits(user.email)
     await auth.use('web').login(user)
     session.flash('success', 'Your password has been updated')
 

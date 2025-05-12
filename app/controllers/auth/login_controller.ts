@@ -17,6 +17,6 @@ export default class LoginController {
       return response.redirect().back()
     }
 
-    return response.redirect().toRoute('menus.store.render')
+    return response.redirect().toRoute('menus.create.render')
   }
 }

@@ -14,7 +14,7 @@ export default class AcceptInvitationController {
     if (!request.hasValidSignature()) {
       session.flash('errorsBag', 'An invalid invitation URL was provided')
       return user
-        ? response.redirect().toRoute('menus.store.render')
+        ? response.redirect().toRoute('menus.create.render')
         : response.redirect().toRoute('auth.login.render')
     }
 
@@ -37,6 +37,6 @@ export default class AcceptInvitationController {
     session.forget('invite_id')
     session.flash(result.state, result.message)
 
-    return response.redirect().toRoute('menus.store.render')
+    return response.redirect().toRoute('menus.create.render')
   }
 }
