@@ -4,9 +4,9 @@ import Restaurant from '#models/restaurant'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
-import db from '@adonisjs/lucid/services/db'
 import RestaurantDto from '#dtos/restaurant'
 import GetAbilities, { type Abilities } from '#actions/abilities/get_abilities'
+import GetRestaurantUserRoleId from '#actions/restaurants/get_restaurant_user_role_id'
 
 @inject()
 export default class RestaurantMiddleware {
@@ -19,12 +19,10 @@ export default class RestaurantMiddleware {
 
       const restaurant = await this.getActiveRestaurant.handle()
 
-      const { roleId } = await db
-        .from('restaurant_users')
-        .where('restaurant_id', restaurant.id)
-        .where('user_id', user.id)
-        .select('role_id as roleId')
-        .firstOrFail()
+      const roleId = await GetRestaurantUserRoleId.handle({
+        restaurantId: restaurant.id,
+        userId: user.id,
+      })
 
       ctx.restaurant = restaurant
       ctx.roleId = roleId

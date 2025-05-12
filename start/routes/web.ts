@@ -96,11 +96,11 @@ router
 router
   .group(() => {
     router.get('/', [CreateRestaurantController, 'render']).as('create.render')
-    router.post('/', [CreateRestaurantController, 'handle']).as('create.handle')
     router.get('/:id', [ActiveRestaurantController, 'handle']).as('active.handle')
     router.get('/:id/currency', [SetRestaurantCurrencyController, 'render']).as('currency.render')
-    router.patch('/:id/currency', [SetRestaurantCurrencyController, 'handle']).as('currency.handle')
+    router.post('/', [CreateRestaurantController, 'handle']).as('create.handle')
     router.put('/:id', [UpdateRestaurantController, 'handle']).as('update.handle')
+    router.patch('/:id/currency', [SetRestaurantCurrencyController, 'handle']).as('currency.handle')
     router.delete('/:id', [DeleteRestaurantController, 'handle']).as('delete.handle')
   })
   .use(middleware.auth())
