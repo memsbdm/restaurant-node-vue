@@ -6,6 +6,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 import db from '@adonisjs/lucid/services/db'
 import RestaurantDto from '#dtos/restaurant'
+import GetAbilities, { type Abilities } from '#actions/abilities/get_abilities'
 
 @inject()
 export default class RestaurantMiddleware {
@@ -27,6 +28,7 @@ export default class RestaurantMiddleware {
 
       ctx.restaurant = restaurant
       ctx.roleId = roleId
+      ctx.can = GetAbilities.handle({ roleId })
     } catch (_) {
       ctx.session.reflash()
       return ctx.response.redirect().toRoute('restaurants.create.render')
@@ -42,6 +44,7 @@ export default class RestaurantMiddleware {
     ctx.inertia.share({
       restaurant: new RestaurantDto(ctx.restaurant),
       restaurants: RestaurantDto.fromArray(restaurants),
+      can: ctx.can,
     })
 
     const output = await next()
@@ -54,5 +57,6 @@ declare module '@adonisjs/core/http' {
     restaurantId?: string
     restaurant: Restaurant
     roleId: number
+    can: Abilities
   }
 }
