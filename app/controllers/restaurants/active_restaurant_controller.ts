@@ -8,6 +8,6 @@ export default class ActiveRestaurantController {
 
   async handle({ params, response }: HttpContext) {
     this.setActiveRestaurant.handle({ id: params.id })
-    return response.redirect().toPath('/')
+    return response.redirect().toRoute('menus.create.render')
   }
 }

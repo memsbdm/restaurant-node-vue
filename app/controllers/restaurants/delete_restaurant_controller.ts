@@ -22,6 +22,6 @@ export default class DeleteRestaurantController {
 
     session.flash('success', 'Your restaurant has been deleted')
 
-    return response.redirect().toPath('/')
+    return response.redirect().toRoute('menus.create.render')
   }
 }

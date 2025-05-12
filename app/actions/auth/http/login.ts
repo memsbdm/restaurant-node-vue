@@ -4,6 +4,7 @@ import { loginValidator } from '#validators/auth'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 import { Infer } from '@vinejs/vine/types'
+import limiter from '@adonisjs/limiter/services/main'
 
 type Params = {
   data: Infer<typeof loginValidator>
@@ -14,7 +15,26 @@ export default class Login {
   constructor(protected ctx: HttpContext) {}
 
   async handle({ data }: Params) {
-    const user = await User.verifyCredentials(data.email, data.password)
+    const limit = limiter.use({
+      requests: 3,
+      duration: '3 hours',
+      blockDuration: '24 hours',
+    })
+
+    const key = `login_${this.ctx.request.ip()}_${data.email}`
+
+    const [error, user] = await limit.penalize(key, async () => {
+      return User.verifyCredentials(data.email, data.password)
+    })
+
+    if (error) {
+      this.ctx.session.flashAll()
+      this.ctx.session.flashErrors({
+        E_TOO_MANY_REQUESTS: 'Too many login attempts. Please try again later.',
+      })
+      return null
+    }
+
     await this.ctx.auth.use('web').login(user, data.remember)
     await this.#checkForRestaurantInvite(user)
 

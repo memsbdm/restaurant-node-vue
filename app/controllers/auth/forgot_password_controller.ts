@@ -40,6 +40,6 @@ export default class ForgotPasswordController {
     await auth.use('web').login(user)
     session.flash('success', 'Your password has been updated')
 
-    return response.redirect().toPath('/')
+    return response.redirect().toRoute('menus.create.render')
   }
 }

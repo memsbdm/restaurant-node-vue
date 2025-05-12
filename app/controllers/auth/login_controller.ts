@@ -11,8 +11,12 @@ export default class LoginController {
   @inject()
   async handle({ request, response }: HttpContext, login: Login) {
     const data = await request.validateUsing(loginValidator)
-    await login.handle({ data })
+    const user = await login.handle({ data })
 
-    return response.redirect().toRoute('home.render')
+    if (!user) {
+      return response.redirect().back()
+    }
+
+    return response.redirect().toRoute('menus.store.render')
   }
 }
