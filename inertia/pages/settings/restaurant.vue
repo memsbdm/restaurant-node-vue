@@ -4,6 +4,7 @@ import type RestaurantInviteDto from '#dtos/restaurant_invite'
 import type RoleDto from '#dtos/role'
 import type UserDto from '#dtos/user'
 import { type Abilities } from '#actions/abilities/get_abilities'
+import { usePoll } from '@inertiajs/vue3'
 
 defineProps<{
   restaurant: RestaurantDto
@@ -13,6 +14,10 @@ defineProps<{
   invites: RestaurantInviteDto[]
   can: Abilities
 }>()
+
+usePoll(5_000, {
+  only: ['users', 'invites'],
+})
 </script>
 
 <template>
