@@ -22,10 +22,10 @@ export default class UpdateRestaurantController {
         const roles = await Role.query().orderBy('name')
         return RoleDto.fromArray(roles)
       },
-      invites: async () => {
+      invites: inertia.defer(async () => {
         const pendingInvites = await GetRestaurantPendingInvites.handle({ restaurant })
         return RestaurantInviteDto.fromArray(pendingInvites)
-      },
+      }),
     })
   }
 

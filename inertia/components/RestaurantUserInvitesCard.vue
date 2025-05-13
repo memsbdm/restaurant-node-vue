@@ -2,7 +2,7 @@
 import RestaurantInviteDto from '#dtos/restaurant_invite'
 import RoleDto from '#dtos/role'
 import { Role } from '#enums/role'
-import { Link, useForm } from '@inertiajs/vue3'
+import { Deferred, Link, useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
 import { tuyau } from '~/core/providers/tuyau'
 import { type Abilities } from '#actions/abilities/get_abilities'
@@ -45,30 +45,35 @@ function getRoleName(roleId: number) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow v-for="invite in invites" :key="invite.id">
-            <TableCell>{{ invite.email }}</TableCell>
-            <TableCell>{{ getRoleName(invite.roleId) }}</TableCell>
-            <TableCell v-if="can.restaurant.manageUsers">
-              <Link
-                :href="
-                  tuyau.$url('settings.restaurant.cancel.invite.handle', {
-                    params: { id: invite.id },
-                  })
-                "
-                as="button"
-                method="delete"
-                class="text-red-500"
-                preserve-scroll
-              >
-                Cancel Invite
-              </Link>
-            </TableCell>
-          </TableRow>
-          <TableRow v-if="!invites?.length">
-            <TableCell colspan="3">
-              <div class="text-center text-slate-600">No pending invites.</div>
-            </TableCell>
-          </TableRow>
+          <Deferred data="invites">
+            <template #fallback>
+              <TableRow><TableCell>Loading...</TableCell></TableRow>
+            </template>
+            <TableRow v-for="invite in invites" :key="invite.id">
+              <TableCell>{{ invite.email }}</TableCell>
+              <TableCell>{{ getRoleName(invite.roleId) }}</TableCell>
+              <TableCell v-if="can.restaurant.manageUsers">
+                <Link
+                  :href="
+                    tuyau.$url('settings.restaurant.cancel.invite.handle', {
+                      params: { id: invite.id },
+                    })
+                  "
+                  as="button"
+                  method="delete"
+                  class="text-red-500"
+                  preserve-scroll
+                >
+                  Cancel Invite
+                </Link>
+              </TableCell>
+            </TableRow>
+            <TableRow v-if="!invites?.length">
+              <TableCell colspan="3">
+                <div class="text-center text-slate-600">No pending invites.</div>
+              </TableCell>
+            </TableRow>
+          </Deferred>
         </TableBody>
       </Table>
 
