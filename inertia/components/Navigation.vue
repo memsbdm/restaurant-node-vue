@@ -16,11 +16,11 @@ defineProps<{
 
 <template>
   <nav class="hidden gap-5 text-sm items-center md:flex lg:gap-6">
-    <a href="/" class="flex items-center gap-2 text-lg font-semibold md:text-base">
+    <Link route="landing" class="flex items-center gap-2 text-lg font-semibold md:text-base">
       <Route class="h-6 w-6" />
 
       <span class="sr-only">Restaurant App</span>
-    </a>
+    </Link>
 
     <div class="flex items-center">
       <Slash class="text-slate-300 w-4 h-4 -rotate-12" />
@@ -50,11 +50,11 @@ defineProps<{
 
     <SheetContent side="left">
       <nav class="grid gap-6 text-lg font-medium">
-        <a href="/" class="flex items-center gap-2 text-lg font-semibold">
+        <Link route="landing" class="flex items-center gap-2 text-lg font-semibold">
           <Route class="h-6 w-6" />
 
           <span class="sr-only">Restaurant App</span>
-        </a>
+        </Link>
 
         <RestaurantSelect :restaurant="restaurant" :restaurants="restaurants" :can />
 

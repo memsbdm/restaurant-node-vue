@@ -53,7 +53,7 @@ const UpdateMenuController = () => import('#controllers/menus/update_menu_contro
 const ShowMenuController = () => import('#controllers/menus/show_menu_controller')
 
 // Landing page
-router.on('/').render('pages/landing').as('landing')
+router.on('/').renderInertia('landing').as('landing')
 
 // Auth
 router
