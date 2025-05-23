@@ -3,7 +3,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import GetCurrencies from '#actions/restaurants/get_currencies'
 import Restaurant from '#models/restaurant'
 import { currencyValidator } from '#validators/currency'
-import SetCurrency from '#actions/restaurants/set_currency'
+import SetRestaurantCurrency from '#actions/restaurants/set_restaurant_currency'
 import RestaurantDto from '#dtos/restaurant'
 import CurrencyDto from '#dtos/currency'
 
@@ -26,7 +26,7 @@ export default class SetRestaurantCurrencyController {
   async handle({ request, response, params }: HttpContext) {
     const restaurant = await Restaurant.findOrFail(params.id)
     const data = await request.validateUsing(currencyValidator)
-    await SetCurrency.handle({ restaurant, data })
+    await SetRestaurantCurrency.handle({ restaurant, data })
 
     return response.redirect().toRoute('menus.create.render')
   }

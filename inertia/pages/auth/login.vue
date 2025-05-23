@@ -2,7 +2,7 @@
 import { tuyau } from '~/core/providers/tuyau'
 import { useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
-import AppHead from '~/components/AppHead.vue'
+import AppHead from '~/components/shared/AppHead.vue'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 
 defineOptions({ layout: AuthLayout })

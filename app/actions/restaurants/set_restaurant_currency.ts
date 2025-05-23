@@ -7,7 +7,7 @@ type Params = {
   data: Infer<typeof currencyValidator>
 }
 
-export default class SetCurrency {
+export default class SetRestaurantCurrency {
   static async handle({ restaurant, data }: Params) {
     await restaurant.merge({ currencyId: data.currencyId }).save()
   }

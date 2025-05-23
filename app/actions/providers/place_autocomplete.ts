@@ -1,6 +1,6 @@
 import type { PlaceAutocompleteDto } from '#dtos/place_autocomplete'
 import env from '#start/env'
-import { placeAutocompleteValidator } from '#validators/google'
+import { placeAutocompleteValidator } from '#validators/providers'
 import { inject } from '@adonisjs/core'
 import { Infer } from '@vinejs/vine/types'
 

@@ -1,5 +1,5 @@
-import PlaceAutocomplete from '#actions/google/place_autocomplete'
-import { placeAutocompleteValidator } from '#validators/google'
+import PlaceAutocomplete from '#actions/providers/place_autocomplete'
+import { placeAutocompleteValidator } from '#validators/providers'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 

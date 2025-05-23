@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
 import { tuyau } from '~/core/providers/tuyau'
 import AuthLayout from '~/layouts/AuthLayout.vue'
-import AppHead from '~/components/AppHead.vue'
+import AppHead from '~/components/shared/AppHead.vue'
 import type RestaurantInviteDto from '#dtos/restaurant_invite'
 
 defineOptions({ layout: AuthLayout })

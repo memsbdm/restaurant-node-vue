@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
-import PlaceAutocomplete from '~/components/google/PlaceAutocomplete.vue'
+import PlaceAutocomplete from '~/components/PlaceAutocomplete.vue'
 import { tuyau } from '~/core/providers/tuyau'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 

@@ -3,7 +3,7 @@ import Restaurant from '#models/restaurant'
 import type User from '#models/user'
 import { createRestaurantValidator } from '#validators/restaurant'
 import { Infer } from '@vinejs/vine/types'
-import PlaceDetails from '#actions/google/place_details'
+import PlaceDetails from '#actions/providers/place_details'
 import db from '@adonisjs/lucid/services/db'
 
 type Params = {
