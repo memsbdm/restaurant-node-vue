@@ -9,11 +9,8 @@ type Params = {
 
 export default class CreateMenu {
   static async handle({ restaurant, data }: Params) {
-    const menuExists = await restaurant.related('menus').query().first()
-
     return restaurant.related('menus').create({
       ...data,
-      isActive: !menuExists,
     })
   }
 }
