@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { tuyau } from '~/core/providers/tuyau'
-import { Link } from '@inertiajs/vue3'
 import type RoleDto from '#dtos/role'
 import type UserDto from '#dtos/user'
 import { type Abilities } from '#actions/abilities/get_abilities'
@@ -51,15 +49,11 @@ function getRoleName(roleId: number) {
             <TableCell>
               <Link
                 v-if="can.restaurant.manageUsers || user.id === member.id"
-                :href="
-                  tuyau.$url('settings.restaurant.remove.user.handle', {
-                    params: { id: member.id },
-                  })
-                "
-                method="delete"
+                route="settings.restaurant.remove.user.handle"
+                :params="{ id: member.id }"
                 class="text-red-500"
-                preserve-scroll
                 as="button"
+                preserve-scroll
               >
                 Remove
               </Link>

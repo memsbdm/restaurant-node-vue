@@ -11,7 +11,7 @@ defineProps<{
   user: UserDto
   users: UserDto[]
   roles: RoleDto[]
-  invites: RestaurantInviteDto[]
+  invites?: RestaurantInviteDto[]
   can: Abilities
 }>()
 

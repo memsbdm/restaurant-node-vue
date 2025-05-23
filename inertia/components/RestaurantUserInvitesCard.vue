@@ -2,13 +2,13 @@
 import RestaurantInviteDto from '#dtos/restaurant_invite'
 import RoleDto from '#dtos/role'
 import { Role } from '#enums/role'
-import { Deferred, Link, useForm } from '@inertiajs/vue3'
+import { Deferred, useForm } from '@inertiajs/vue3'
 import { Loader } from 'lucide-vue-next'
 import { tuyau } from '~/core/providers/tuyau'
 import { type Abilities } from '#actions/abilities/get_abilities'
 
 const props = defineProps<{
-  invites: RestaurantInviteDto[]
+  invites?: RestaurantInviteDto[]
   roles: RoleDto[]
   can: Abilities
 }>()
@@ -54,15 +54,12 @@ function getRoleName(roleId: number) {
               <TableCell>{{ getRoleName(invite.roleId) }}</TableCell>
               <TableCell v-if="can.restaurant.manageUsers">
                 <Link
-                  :href="
-                    tuyau.$url('settings.restaurant.cancel.invite.handle', {
-                      params: { id: invite.id },
-                    })
-                  "
+                  route="settings.restaurant.cancel.invite.handle"
+                  :params="{ id: invite.id }"
                   as="button"
                   method="delete"
-                  class="text-red-500"
                   preserve-scroll
+                  class="text-red-500"
                 >
                   Cancel Invite
                 </Link>
