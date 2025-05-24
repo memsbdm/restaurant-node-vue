@@ -1,6 +1,7 @@
 import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 import type { StatusPageRange, StatusPageRenderer } from '@adonisjs/core/types/http'
+import ForbiddenException from './forbidden_exception.js'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -30,6 +31,12 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * response to the client
    */
   async handle(error: unknown, ctx: HttpContext) {
+    if (error instanceof ForbiddenException) {
+      ctx.session.flashErrors({
+        E_FORBIDDEN: error.message,
+      })
+      return ctx.response.redirect().back()
+    }
     return super.handle(error, ctx)
   }
 

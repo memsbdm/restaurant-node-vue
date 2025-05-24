@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3'
 import { tuyau } from '~/core/providers/tuyau'
-import { Loader } from 'lucide-vue-next'
+import { AlertCircle, Loader } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 defineProps<{
@@ -30,6 +30,13 @@ function handleFormSubmit() {
     <CardContent>
       <form id="accountDeleteForm" class="grid gap-4" @submit.prevent="handleFormSubmit">
         <InvalidCredentialsAlert v-if="formSent" :errors="errors" />
+        <Alert v-if="errors?.E_FORBIDDEN" variant="destructive" class="mb-3">
+          <AlertCircle class="w-4 h-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription
+            >You must delete all your restaurants before deleting your account.</AlertDescription
+          >
+        </Alert>
 
         <FormInput
           v-model="form.password"
