@@ -1,5 +1,8 @@
 import Restaurant from '#models/restaurant'
 import db from '@adonisjs/lucid/services/db'
+import GetRestaurantUserRoleId from './get_restaurant_user_role_id.js'
+import ForbiddenException from '#exceptions/forbidden_exception'
+import { Role } from '#enums/role'
 
 type Params = {
   restaurant: Restaurant
@@ -8,6 +11,17 @@ type Params = {
 
 export default class RemoveRestaurantUser {
   static async handle({ restaurant, removeUserId }: Params) {
+    const deletedUserRoleId = await GetRestaurantUserRoleId.handle({
+      restaurantId: restaurant.id,
+      userId: removeUserId,
+    })
+
+    if (deletedUserRoleId === Role.Admin) {
+      throw new ForbiddenException(
+        'You cannot remove the owner of the restaurant. If you are the owner, please delete the restaurant.'
+      )
+    }
+
     const otherUserCount = await restaurant
       .related('users')
       .query()

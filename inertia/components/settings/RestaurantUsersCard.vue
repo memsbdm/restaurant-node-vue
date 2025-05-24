@@ -2,12 +2,14 @@
 import type RoleDto from '#dtos/role'
 import type UserDto from '#dtos/user'
 import { type Abilities } from '#actions/abilities/get_abilities'
+import { Role } from '#enums/role'
 
 const props = defineProps<{
   users: UserDto[]
   user: UserDto
   roles: RoleDto[]
   can: Abilities
+  userRoleId: number
 }>()
 
 function getRoleName(roleId: number) {
@@ -48,7 +50,10 @@ function getRoleName(roleId: number) {
             </TableCell>
             <TableCell>
               <Link
-                v-if="can.restaurant.manageUsers || user.id === member.id"
+                v-if="
+                  (user.id == member.id && userRoleId !== Role.Admin) ||
+                  (can.restaurant.manageUsers && user.id !== member.id)
+                "
                 route="settings.restaurant.remove.user.handle"
                 :params="{ id: member.id }"
                 class="text-red-500"

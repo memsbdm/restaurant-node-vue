@@ -12,8 +12,14 @@ import { updateRestaurantValidator } from '#validators/restaurant'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UpdateRestaurantController {
-  render({ inertia, restaurant }: HttpContext) {
+  async render({ auth, inertia, restaurant }: HttpContext) {
     return inertia.render('settings/restaurant', {
+      userRoleId: async () => {
+        return await GetRestaurantUserRoleId.handle({
+          restaurantId: restaurant.id,
+          userId: auth.user!.id,
+        })
+      },
       users: async () => {
         const users = await GetRestaurantUsers.handle({ restaurant })
         return UserDto.fromArray(users)

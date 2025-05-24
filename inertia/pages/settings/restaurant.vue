@@ -13,6 +13,7 @@ defineProps<{
   roles: RoleDto[]
   invites?: RestaurantInviteDto[]
   can: Abilities
+  userRoleId: number
 }>()
 
 usePoll(5_000, {
@@ -25,7 +26,7 @@ usePoll(5_000, {
 
   <SettingsShell>
     <EditRestaurantCard :restaurant="restaurant" />
-    <RestaurantUsersCard :user="user" :users="users" :roles="roles" :can />
+    <RestaurantUsersCard :user="user" :users="users" :roles="roles" :can :userRoleId />
     <RestaurantUserInvitesCard :invites="invites" :roles="roles" :can />
   </SettingsShell>
 </template>
