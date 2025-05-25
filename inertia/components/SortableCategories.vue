@@ -2,7 +2,7 @@
 import { router } from '@inertiajs/vue3'
 import CategoryDto from '#dtos/category'
 import type MenuDto from '#dtos/menu'
-import { EllipsisVertical, GripVertical, Pencil, Plus } from 'lucide-vue-next'
+import { GripVertical, Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { nextTick } from 'vue'
 import { ref } from 'vue'
 import { computed } from 'vue'
@@ -72,7 +72,7 @@ function onArticleOrderChange() {
     <template #item="{ element: category, index }">
       <li class="flex flex-col border-b border-slate-200 pb-2 mb-2">
         <div
-          class="flex items-center justify-between rounded-md p-2 hover:bg-slate-50 duration-300 group relative"
+          class="flex items-center justify-between rounded-md p-2 hover:bg-slate-50 duration-300 group relative mb-4 mt-2"
         >
           <div class="flex items-center gap-4">
             <div
@@ -80,7 +80,7 @@ function onArticleOrderChange() {
             >
               <GripVertical class="w-4 h-4" />
             </div>
-            <span class="font-bold">{{ category.name }}</span>
+            <span class="font-bold text-lg">{{ category.name }}</span>
 
             <span v-if="!category.description" class="text-orange-400 text-xs items-center gap-2">
               Missing description
@@ -95,19 +95,15 @@ function onArticleOrderChange() {
               >
                 <Pencil class="w-3.5 h-3.5" />
               </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                class="absolute left-7 top-1/2 -translate-y-1/2 w-7 h-7 hover:text-red-500"
+                @click="destroy.open(category)"
+              >
+                <Trash2 class="w-3.5 h-3.5" />
+              </Button>
             </div>
-          </div>
-
-          <div class="flex gap-2 items-center justify-end">
-            <DropdownMenu>
-              <DropdownMenuTrigger class="ml-2 text-slate-400 hover:text-slate-950 duration-300">
-                <EllipsisVertical class="w-4 h-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem @click="onEdit(category)">Edit</DropdownMenuItem>
-                <DropdownMenuItem @click="destroy.open(category)">Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
           </div>
         </div>
         <SortableArticles v-model="categories[index]" :menu="menu" @end="onArticleOrderChange" />
@@ -115,7 +111,7 @@ function onArticleOrderChange() {
     </template>
   </Sortable>
 
-  <Button variant="ghost" size="sm" class="flex gap-2" @click="onCreate">
+  <Button variant="outline" size="sm" class="flex mx-auto gap-2 mt-6 mb-3" @click="onCreate">
     <Plus class="w-4 h-4" />
     Add Category
   </Button>

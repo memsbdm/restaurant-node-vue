@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-export type InputType = 'select' | 'textarea' | 'string' | 'password' | 'email' | 'number'
+export type InputType = 'select' | 'textarea' | 'text' | 'password' | 'email' | 'number'
 
 const props = withDefaults(
   defineProps<{
@@ -13,9 +13,11 @@ const props = withDefaults(
     disabled?: boolean
     required?: boolean
     step?: string
+    min?: string
+    max?: string
   }>(),
   {
-    type: 'string',
+    type: 'text',
     step: '1',
   }
 )
@@ -75,6 +77,8 @@ defineExpose({
         :required="required"
         :placeholder="placeholder"
         :step="step"
+        :min="min"
+        :max="max"
       />
 
       <Input

@@ -143,6 +143,11 @@ router
 
 // Articles
 router
+  .get('/menus/:menuId/categories/:categoryId/article', [CreateArticleController, 'render'])
+  .use([middleware.auth(), middleware.restaurant()])
+  .as('articles.create.render')
+
+router
   .group(() => {
     router.post('/', [CreateArticleController, 'handle']).as('create.handle')
     router.put('/:id', [UpdateArticleController, 'handle']).as('update.handle')

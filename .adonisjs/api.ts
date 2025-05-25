@@ -9,808 +9,694 @@ import type { InferInput } from '@vinejs/vine/types'
 
 type AuthLoginGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/login_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['render'], false>
 }
 type AuthLoginPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/auth.ts'))['loginValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/login_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['loginValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/login_controller.ts').default['handle'], true>
 }
 type AuthRegisterGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/register_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/auth/register_controller.ts').default['render'], false>
 }
 type AuthRegisterPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/auth.ts'))['registerValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/register_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['registerValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/register_controller.ts').default['handle'], true>
 }
 type AuthForgotpasswordGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/forgot_password_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['render'], false>
 }
 type AuthForgotpasswordPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/auth.ts'))['passwordResetSendValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/forgot_password_controller.ts').default['send'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['passwordResetSendValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['send'], true>
 }
 type AuthForgotpasswordResetIdGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/forgot_password_controller.ts').default['reset'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['reset'], false>
 }
 type AuthForgotpasswordResetPatch = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/auth.ts'))['passwordResetValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/forgot_password_controller.ts').default['update'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/auth.ts')['passwordResetValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/auth/forgot_password_controller.ts').default['update'], true>
 }
 type AuthLogoutDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/auth/logout_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/auth/logout_controller.ts').default['handle'], false>
 }
 type RestaurantsGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/create_restaurant_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['render'], false>
 }
 type RestaurantsIdGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/active_restaurant_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/active_restaurant_controller.ts').default['handle'], false>
 }
 type RestaurantsIdCurrencyGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['render'], false>
 }
 type RestaurantsPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/restaurant.ts'))['createRestaurantValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['createRestaurantValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/create_restaurant_controller.ts').default['handle'], true>
 }
 type RestaurantsIdPut = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/restaurant.ts'))['updateRestaurantValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/update_restaurant_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['updateRestaurantValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/update_restaurant_controller.ts').default['handle'], true>
 }
 type RestaurantsIdCurrencyPatch = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/currency.ts'))['currencyValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/currency.ts')['currencyValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/set_restaurant_currency_controller.ts').default['handle'], true>
 }
 type RestaurantsIdDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/delete_restaurant_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/delete_restaurant_controller.ts').default['handle'], false>
 }
 type RestaurantsInvitesIdAcceptGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/accept_invite_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/accept_invite_controller.ts').default['handle'], false>
 }
 type MenusGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/menus/create_menu_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['render'], false>
 }
 type MenusIdGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/menus/show_menu_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/menus/show_menu_controller.ts').default['render'], false>
 }
 type MenusPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/menu.ts'))['menuValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/menus/create_menu_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['menuValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/menus/create_menu_controller.ts').default['handle'], true>
 }
 type MenusIdPut = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/menu.ts'))['menuValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/menus/update_menu_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/menu.ts')['menuValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/menus/update_menu_controller.ts').default['handle'], true>
 }
 type MenusIdPatch = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/menus/active_menu_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/menus/active_menu_controller.ts').default['handle'], false>
 }
 type MenusIdDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/menus/delete_menu_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/menus/delete_menu_controller.ts').default['handle'], false>
 }
 type CategoriesMenusIdCategoriesPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/category.ts'))['categoryValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/categories/create_category_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/category.ts')['categoryValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/categories/create_category_controller.ts').default['handle'], true>
 }
 type CategoriesMenusIdCategoriesIdPut = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/category.ts'))['categoryValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/categories/update_category_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/category.ts')['categoryValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/categories/update_category_controller.ts').default['handle'], true>
 }
 type CategoriesMenusIdCategoriesIdDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/categories/delete_category_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/categories/delete_category_controller.ts').default['handle'], false>
 }
 type CategoriesMenusIdCategoriesOrderPatch = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/category.ts'))['categoryOrderValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/categories/update_category_order_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/category.ts')['categoryOrderValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/categories/update_category_order_controller.ts').default['handle'], true>
+}
+type MenusIdCategoriesIdArticleGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/articles/create_article_controller.ts').default['render'], false>
 }
 type ArticlesPost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/article.ts'))['articleValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/articles/create_article_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/articles/create_article_controller.ts').default['handle'], true>
 }
 type ArticlesIdPut = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/article.ts'))['articleValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/articles/update_article_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/articles/update_article_controller.ts').default['handle'], true>
 }
 type ArticlesMenusIdOrderPatch = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/article.ts'))['articleOrderValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/articles/update_article_order_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleOrderValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/articles/update_article_order_controller.ts').default['handle'], true>
 }
 type ArticlesIdDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/articles/delete_article_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_controller.ts').default['handle'], false>
 }
 type ArticlesIdImageDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/articles/delete_article_image_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_image_controller.ts').default['handle'], false>
 }
 type SettingsProfileGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/settings/update_profile_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['render'], false>
 }
 type SettingsProfilePut = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/setting.ts'))['updateProfileValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/settings/update_profile_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/setting.ts')['updateProfileValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['handle'], true>
 }
 type SettingsAccountGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/settings/show_account_settings_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/settings/show_account_settings_controller.ts').default['render'], false>
 }
 type SettingsAccountEmailPatch = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/setting.ts'))['updateEmailValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/settings/update_email_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/setting.ts')['updateEmailValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/settings/update_email_controller.ts').default['handle'], true>
 }
 type SettingsAccountDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/settings/delete_account_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/settings/delete_account_controller.ts').default['handle'], false>
 }
 type SettingsRestaurantGetHead = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/update_restaurant_controller.ts').default['render'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/update_restaurant_controller.ts').default['render'], false>
 }
 type SettingsRestaurantInvitePost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/restaurant.ts'))['restaurantInviteValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/invite_user_controller.ts').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/restaurant.ts')['restaurantInviteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/invite_user_controller.ts').default['handle'], true>
 }
 type SettingsRestaurantInvitesIdDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/restaurants/cancel_restaurant_invite_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/restaurants/cancel_restaurant_invite_controller.ts').default['handle'], false>
 }
 type SettingsRestaurantUserIdDelete = {
   request: unknown
-  response: MakeTuyauResponse<
-    import('../app/controllers/settings/remove_restaurant_user_controller.ts').default['handle'],
-    false
-  >
+  response: MakeTuyauResponse<import('../app/controllers/settings/remove_restaurant_user_controller.ts').default['handle'], false>
 }
 type ApiV1GooglePlacesautocompletePost = {
-  request: MakeTuyauRequest<
-    InferInput<(typeof import('../app/validators/providers.js'))['placeAutocompleteValidator']>
-  >
-  response: MakeTuyauResponse<
-    import('../app/controllers/providers/place_autocomplete_controller.js').default['handle'],
-    true
-  >
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/providers.ts')['placeAutocompleteValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/providers/place_autocomplete_controller.ts').default['handle'], true>
 }
 export interface ApiDefinition {
-  auth: {
+  'auth': {
     'login': {
-      $url: {}
-      $get: AuthLoginGetHead
-      $head: AuthLoginGetHead
-      $post: AuthLoginPost
-    }
+      '$url': {
+      };
+      '$get': AuthLoginGetHead;
+      '$head': AuthLoginGetHead;
+      '$post': AuthLoginPost;
+    };
     'register': {
-      $url: {}
-      $get: AuthRegisterGetHead
-      $head: AuthRegisterGetHead
-      $post: AuthRegisterPost
-    }
+      '$url': {
+      };
+      '$get': AuthRegisterGetHead;
+      '$head': AuthRegisterGetHead;
+      '$post': AuthRegisterPost;
+    };
     'forgot-password': {
-      $url: {}
-      $get: AuthForgotpasswordGetHead
-      $head: AuthForgotpasswordGetHead
-      $post: AuthForgotpasswordPost
-      reset: {
+      '$url': {
+      };
+      '$get': AuthForgotpasswordGetHead;
+      '$head': AuthForgotpasswordGetHead;
+      '$post': AuthForgotpasswordPost;
+      'reset': {
         ':value': {
-          $url: {}
-          $get: AuthForgotpasswordResetIdGetHead
-          $head: AuthForgotpasswordResetIdGetHead
-        }
-        '$url': {}
-        '$patch': AuthForgotpasswordResetPatch
-      }
-    }
+          '$url': {
+          };
+          '$get': AuthForgotpasswordResetIdGetHead;
+          '$head': AuthForgotpasswordResetIdGetHead;
+        };
+        '$url': {
+        };
+        '$patch': AuthForgotpasswordResetPatch;
+      };
+    };
     'logout': {
-      $url: {}
-      $delete: AuthLogoutDelete
-    }
-  }
-  restaurants: {
-    '$url': {}
-    '$get': RestaurantsGetHead
-    '$head': RestaurantsGetHead
+      '$url': {
+      };
+      '$delete': AuthLogoutDelete;
+    };
+  };
+  'restaurants': {
+    '$url': {
+    };
+    '$get': RestaurantsGetHead;
+    '$head': RestaurantsGetHead;
     ':id': {
-      $url: {}
-      $get: RestaurantsIdGetHead
-      $head: RestaurantsIdGetHead
-      currency: {
-        $url: {}
-        $get: RestaurantsIdCurrencyGetHead
-        $head: RestaurantsIdCurrencyGetHead
-        $patch: RestaurantsIdCurrencyPatch
-      }
-      $put: RestaurantsIdPut
-      $delete: RestaurantsIdDelete
-    }
-    '$post': RestaurantsPost
+      '$url': {
+      };
+      '$get': RestaurantsIdGetHead;
+      '$head': RestaurantsIdGetHead;
+      'currency': {
+        '$url': {
+        };
+        '$get': RestaurantsIdCurrencyGetHead;
+        '$head': RestaurantsIdCurrencyGetHead;
+        '$patch': RestaurantsIdCurrencyPatch;
+      };
+      '$put': RestaurantsIdPut;
+      '$delete': RestaurantsIdDelete;
+    };
+    '$post': RestaurantsPost;
     'invites': {
       ':id': {
-        accept: {
-          $url: {}
-          $get: RestaurantsInvitesIdAcceptGetHead
-          $head: RestaurantsInvitesIdAcceptGetHead
-        }
-      }
-    }
-  }
-  menus: {
-    '$url': {}
-    '$get': MenusGetHead
-    '$head': MenusGetHead
+        'accept': {
+          '$url': {
+          };
+          '$get': RestaurantsInvitesIdAcceptGetHead;
+          '$head': RestaurantsInvitesIdAcceptGetHead;
+        };
+      };
+    };
+  };
+  'menus': {
+    '$url': {
+    };
+    '$get': MenusGetHead;
+    '$head': MenusGetHead;
     ':id': {
-      $url: {}
-      $get: MenusIdGetHead
-      $head: MenusIdGetHead
-      $put: MenusIdPut
-      $patch: MenusIdPatch
-      $delete: MenusIdDelete
-    }
-    '$post': MenusPost
-  }
-  categories: {
-    menus: {
-      ':menuId': {
-        categories: {
-          '$url': {}
-          '$post': CategoriesMenusIdCategoriesPost
-          ':categoryId': {
-            $url: {}
-            $put: CategoriesMenusIdCategoriesIdPut
-            $delete: CategoriesMenusIdCategoriesIdDelete
-          }
-          'order': {
-            $url: {}
-            $patch: CategoriesMenusIdCategoriesOrderPatch
-          }
-        }
-      }
-    }
-  }
-  articles: {
-    '$url': {}
-    '$post': ArticlesPost
-    ':id': {
-      $url: {}
-      $put: ArticlesIdPut
-      $delete: ArticlesIdDelete
-      image: {
-        $url: {}
-        $delete: ArticlesIdImageDelete
-      }
-    }
+      '$url': {
+      };
+      '$get': MenusIdGetHead;
+      '$head': MenusIdGetHead;
+      '$put': MenusIdPut;
+      '$patch': MenusIdPatch;
+      '$delete': MenusIdDelete;
+    };
+    '$post': MenusPost;
+    ':menuId': {
+      'categories': {
+        ':categoryId': {
+          'article': {
+            '$url': {
+            };
+            '$get': MenusIdCategoriesIdArticleGetHead;
+            '$head': MenusIdCategoriesIdArticleGetHead;
+          };
+        };
+      };
+    };
+  };
+  'categories': {
     'menus': {
       ':menuId': {
-        order: {
-          $url: {}
-          $patch: ArticlesMenusIdOrderPatch
-        }
-      }
-    }
-  }
-  settings: {
-    profile: {
-      $url: {}
-      $get: SettingsProfileGetHead
-      $head: SettingsProfileGetHead
-      $put: SettingsProfilePut
-    }
-    account: {
-      $url: {}
-      $get: SettingsAccountGetHead
-      $head: SettingsAccountGetHead
-      email: {
-        $url: {}
-        $patch: SettingsAccountEmailPatch
-      }
-      $delete: SettingsAccountDelete
-    }
-    restaurant: {
-      $url: {}
-      $get: SettingsRestaurantGetHead
-      $head: SettingsRestaurantGetHead
-      invite: {
-        $url: {}
-        $post: SettingsRestaurantInvitePost
-      }
-      invites: {
+        'categories': {
+          '$url': {
+          };
+          '$post': CategoriesMenusIdCategoriesPost;
+          ':categoryId': {
+            '$url': {
+            };
+            '$put': CategoriesMenusIdCategoriesIdPut;
+            '$delete': CategoriesMenusIdCategoriesIdDelete;
+          };
+          'order': {
+            '$url': {
+            };
+            '$patch': CategoriesMenusIdCategoriesOrderPatch;
+          };
+        };
+      };
+    };
+  };
+  'articles': {
+    '$url': {
+    };
+    '$post': ArticlesPost;
+    ':id': {
+      '$url': {
+      };
+      '$put': ArticlesIdPut;
+      '$delete': ArticlesIdDelete;
+      'image': {
+        '$url': {
+        };
+        '$delete': ArticlesIdImageDelete;
+      };
+    };
+    'menus': {
+      ':menuId': {
+        'order': {
+          '$url': {
+          };
+          '$patch': ArticlesMenusIdOrderPatch;
+        };
+      };
+    };
+  };
+  'settings': {
+    'profile': {
+      '$url': {
+      };
+      '$get': SettingsProfileGetHead;
+      '$head': SettingsProfileGetHead;
+      '$put': SettingsProfilePut;
+    };
+    'account': {
+      '$url': {
+      };
+      '$get': SettingsAccountGetHead;
+      '$head': SettingsAccountGetHead;
+      'email': {
+        '$url': {
+        };
+        '$patch': SettingsAccountEmailPatch;
+      };
+      '$delete': SettingsAccountDelete;
+    };
+    'restaurant': {
+      '$url': {
+      };
+      '$get': SettingsRestaurantGetHead;
+      '$head': SettingsRestaurantGetHead;
+      'invite': {
+        '$url': {
+        };
+        '$post': SettingsRestaurantInvitePost;
+      };
+      'invites': {
         ':id': {
-          $url: {}
-          $delete: SettingsRestaurantInvitesIdDelete
-        }
-      }
-      user: {
+          '$url': {
+          };
+          '$delete': SettingsRestaurantInvitesIdDelete;
+        };
+      };
+      'user': {
         ':id': {
-          $url: {}
-          $delete: SettingsRestaurantUserIdDelete
-        }
-      }
-    }
-  }
-  api: {
-    v1: {
-      google: {
+          '$url': {
+          };
+          '$delete': SettingsRestaurantUserIdDelete;
+        };
+      };
+    };
+  };
+  'api': {
+    'v1': {
+      'google': {
         'places-autocomplete': {
-          $url: {}
-          $post: ApiV1GooglePlacesautocompletePost
-        }
-      }
-    }
-  }
+          '$url': {
+          };
+          '$post': ApiV1GooglePlacesautocompletePost;
+        };
+      };
+    };
+  };
 }
 const routes = [
   {
     params: [],
     name: 'landing',
     path: '/',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
     name: 'auth.login.render',
     path: '/auth/login',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as AuthLoginGetHead,
   },
   {
     params: [],
     name: 'auth.login.handle',
     path: '/auth/login',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as AuthLoginPost,
   },
   {
     params: [],
     name: 'auth.register.render',
     path: '/auth/register',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as AuthRegisterGetHead,
   },
   {
     params: [],
     name: 'auth.register.handle',
     path: '/auth/register',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as AuthRegisterPost,
   },
   {
     params: [],
     name: 'auth.forgot-password.render',
     path: '/auth/forgot-password',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as AuthForgotpasswordGetHead,
   },
   {
     params: [],
     name: 'auth.forgot-password.send',
     path: '/auth/forgot-password',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as AuthForgotpasswordPost,
   },
   {
-    params: ['value'],
+    params: ["value"],
     name: 'auth.forgot-password.reset',
     path: '/auth/forgot-password/reset/:value',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as AuthForgotpasswordResetIdGetHead,
   },
   {
     params: [],
     name: 'auth.forgot-password.update',
     path: '/auth/forgot-password/reset',
-    method: ['PATCH'],
+    method: ["PATCH"],
     types: {} as AuthForgotpasswordResetPatch,
   },
   {
     params: [],
     name: 'auth.logout.handle',
     path: '/auth/logout',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as AuthLogoutDelete,
   },
   {
     params: [],
     name: 'restaurants.create.render',
     path: '/restaurants',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as RestaurantsGetHead,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'restaurants.active.handle',
     path: '/restaurants/:id',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as RestaurantsIdGetHead,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'restaurants.currency.render',
     path: '/restaurants/:id/currency',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as RestaurantsIdCurrencyGetHead,
   },
   {
     params: [],
     name: 'restaurants.create.handle',
     path: '/restaurants',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as RestaurantsPost,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'restaurants.update.handle',
     path: '/restaurants/:id',
-    method: ['PUT'],
+    method: ["PUT"],
     types: {} as RestaurantsIdPut,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'restaurants.currency.handle',
     path: '/restaurants/:id/currency',
-    method: ['PATCH'],
+    method: ["PATCH"],
     types: {} as RestaurantsIdCurrencyPatch,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'restaurants.delete.handle',
     path: '/restaurants/:id',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as RestaurantsIdDelete,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'restaurants.accept.invitation.handle',
     path: '/restaurants/invites/:id/accept',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as RestaurantsInvitesIdAcceptGetHead,
   },
   {
     params: [],
     name: 'menus.create.render',
     path: '/menus',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as MenusGetHead,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'menus.show.render',
     path: '/menus/:id',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as MenusIdGetHead,
   },
   {
     params: [],
     name: 'menus.create.handle',
     path: '/menus',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as MenusPost,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'menus.update.handle',
     path: '/menus/:id',
-    method: ['PUT'],
+    method: ["PUT"],
     types: {} as MenusIdPut,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'menus.active.handle',
     path: '/menus/:id',
-    method: ['PATCH'],
+    method: ["PATCH"],
     types: {} as MenusIdPatch,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'menus.delete.handle',
     path: '/menus/:id',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as MenusIdDelete,
   },
   {
-    params: ['menuId'],
+    params: ["menuId"],
     name: 'categories.create.handle',
     path: '/categories/menus/:menuId/categories',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as CategoriesMenusIdCategoriesPost,
   },
   {
-    params: ['menuId', 'categoryId'],
+    params: ["menuId","categoryId"],
     name: 'categories.update.handle',
     path: '/categories/menus/:menuId/categories/:categoryId',
-    method: ['PUT'],
+    method: ["PUT"],
     types: {} as CategoriesMenusIdCategoriesIdPut,
   },
   {
-    params: ['menuId', 'categoryId'],
+    params: ["menuId","categoryId"],
     name: 'categories.delete.handle',
     path: '/categories/menus/:menuId/categories/:categoryId',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as CategoriesMenusIdCategoriesIdDelete,
   },
   {
-    params: ['menuId'],
+    params: ["menuId"],
     name: 'categories.order.handle',
     path: '/categories/menus/:menuId/categories/order',
-    method: ['PATCH'],
+    method: ["PATCH"],
     types: {} as CategoriesMenusIdCategoriesOrderPatch,
+  },
+  {
+    params: ["menuId","categoryId"],
+    name: 'articles.create.render',
+    path: '/menus/:menuId/categories/:categoryId/article',
+    method: ["GET","HEAD"],
+    types: {} as MenusIdCategoriesIdArticleGetHead,
   },
   {
     params: [],
     name: 'articles.create.handle',
     path: '/articles',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as ArticlesPost,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'articles.update.handle',
     path: '/articles/:id',
-    method: ['PUT'],
+    method: ["PUT"],
     types: {} as ArticlesIdPut,
   },
   {
-    params: ['menuId'],
+    params: ["menuId"],
     name: 'articles.order.handle',
     path: '/articles/menus/:menuId/order',
-    method: ['PATCH'],
+    method: ["PATCH"],
     types: {} as ArticlesMenusIdOrderPatch,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'articles.delete.handle',
     path: '/articles/:id',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as ArticlesIdDelete,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'articles.delete.image.handle',
     path: '/articles/:id/image',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as ArticlesIdImageDelete,
   },
   {
     params: [],
     name: 'settings.profile.update.render',
     path: '/settings/profile',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as SettingsProfileGetHead,
   },
   {
     params: [],
     name: 'settings.profile.update.handle',
     path: '/settings/profile',
-    method: ['PUT'],
+    method: ["PUT"],
     types: {} as SettingsProfilePut,
   },
   {
     params: [],
     name: 'settings.account.update.render',
     path: '/settings/account',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as SettingsAccountGetHead,
   },
   {
     params: [],
     name: 'settings.account.update.email.handle',
     path: '/settings/account/email',
-    method: ['PATCH'],
+    method: ["PATCH"],
     types: {} as SettingsAccountEmailPatch,
   },
   {
     params: [],
     name: 'settings.account.delete.handle',
     path: '/settings/account',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as SettingsAccountDelete,
   },
   {
     params: [],
     name: 'settings.restaurant.update.render',
     path: '/settings/restaurant',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as SettingsRestaurantGetHead,
   },
   {
     params: [],
     name: 'settings.restaurant.invite.user.handle',
     path: '/settings/restaurant/invite',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as SettingsRestaurantInvitePost,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'settings.restaurant.cancel.invite.handle',
     path: '/settings/restaurant/invites/:id',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as SettingsRestaurantInvitesIdDelete,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'settings.restaurant.remove.user.handle',
     path: '/settings/restaurant/user/:id',
-    method: ['DELETE'],
+    method: ["DELETE"],
     types: {} as SettingsRestaurantUserIdDelete,
   },
   {
     params: [],
     name: 'api.google.autocomplete',
     path: '/api/v1/google/places-autocomplete',
-    method: ['POST'],
+    method: ["POST"],
     types: {} as ApiV1GooglePlacesautocompletePost,
   },
-] as const
+] as const;
 export const api = {
   routes,
-  definition: {} as ApiDefinition,
+  definition: {} as ApiDefinition
 }
 declare module '@tuyau/inertia/types' {
   type InertiaApi = typeof api

@@ -25,7 +25,7 @@ watchEffect(() => (internalCategories.value = structuredClone(toRaw(props.catego
 <template>
   <AppHead :title="menu.name" :description="`Manage your menu ${menu.name}`" />
 
-  <div class="w-full max-w-screen-lg mx-auto bg-background border rounded-xl py-4 lg:px-4">
+  <div class="w-full max-w-screen-lg mx-auto bg-background border rounded-xl p-4">
     <div class="flex flex-wrap items-center justify-between mb-6">
       <div class="px-4 flex items-center gap-2">
         <Switch
@@ -39,7 +39,7 @@ watchEffect(() => (internalCategories.value = structuredClone(toRaw(props.catego
       <div class="flex items-center justify-end gap-2">
         <Button size="sm" variant="ghost" @click="actions.edit(internalMenu)">
           <Pencil class="w-3 h-3 mr-1" />
-          Edit
+          Rename
         </Button>
 
         <Button

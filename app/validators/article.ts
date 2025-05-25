@@ -11,6 +11,8 @@ export const articleValidator = vine.withMetaData<RestaurantMetaData>().compile(
       .transform((value) => Number.parseFloat(value.toFixed(2))),
     image: vine.file({ extnames: ['jpg', 'png', 'jpeg'], size: 5 << 20 }).optional(),
     categoryId: vine.string().exists(existsInRestaurant('categories')),
+    menuId: vine.string().exists(existsInRestaurant('menus')),
+    hasOptions: vine.boolean().optional(),
   })
 )
 

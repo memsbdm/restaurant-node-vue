@@ -34,6 +34,7 @@ watchEffect(() => (list.value = props.menus))
     </div>
 
     <ul class="flex flex-col px-1">
+      <li v-if="!list.length" class="text-center font-semibold text-sm py-1.5">No menu found</li>
       <li
         v-for="item in list"
         :key="item.id"
