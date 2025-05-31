@@ -1,7 +1,7 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'article_options'
+  protected tableName = 'option_categories'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -9,11 +9,11 @@ export default class extends BaseSchema {
       table.string('name', 30).notNullable()
       table
         .integer('type_id')
-        .references('article_option_types.id')
+        .references('option_category_types.id')
         .onDelete('CASCADE')
         .notNullable()
       table.integer('order').unsigned().notNullable().defaultTo(0)
-      table.bigIncrements('article_id').references('articles.id').onDelete('CASCADE').notNullable()
+      table.bigint('article_id').references('articles.id').onDelete('CASCADE').notNullable()
     })
   }
 
