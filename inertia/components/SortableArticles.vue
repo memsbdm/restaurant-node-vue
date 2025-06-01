@@ -95,7 +95,7 @@ const showDeleteAlert = ref(false)
     :action-href="
       destroy.resource
         ? tuyau.$url('articles.delete.handle', {
-            params: { id: destroy.resource.id },
+            params: { id: destroy.resource.id, menuId: props.menu.id },
           })
         : ''
     "

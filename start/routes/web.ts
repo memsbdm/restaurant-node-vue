@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const EditArticleController = () => import('#controllers/articles/edit_article_controller')
 const RemoveRestaurantUserController = () =>
   import('#controllers/settings/remove_restaurant_user_controller')
 const CancelRestaurantInviteController = () =>
@@ -148,13 +149,22 @@ router
   .as('articles.create.render')
 
 router
+  .get('/menus/:menuId/articles/:id', [EditArticleController, 'render'])
+  .use([middleware.auth(), middleware.restaurant()])
+  .as('articles.edit.render')
+
+router
+  .delete('/menus/:menuId/articles/:id', [DeleteArticleController, 'handle'])
+  .use([middleware.auth(), middleware.restaurant()])
+  .as('articles.delete.handle')
+
+router
   .group(() => {
     router.post('/', [CreateArticleController, 'handle']).as('create.handle')
     router.put('/:id', [UpdateArticleController, 'handle']).as('update.handle')
     router
       .patch('/menus/:menuId/order', [UpdateArticleOrderController, 'handle'])
       .as('order.handle')
-    router.delete('/:id', [DeleteArticleController, 'handle']).as('delete.handle')
     router.delete('/:id/image', [DeleteArticleImageController, 'handle']).as('delete.image.handle')
   })
   .use([middleware.auth(), middleware.restaurant()])

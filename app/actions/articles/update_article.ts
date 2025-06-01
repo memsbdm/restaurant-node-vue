@@ -25,7 +25,7 @@ export default class UpdateArticle {
     article.merge({
       name: data.name,
       description: data.description,
-      priceInCents: data.price * 100,
+      priceInCents: Math.floor(data.price * 100),
       categoryId: data.categoryId,
     })
 

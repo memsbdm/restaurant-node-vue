@@ -119,6 +119,14 @@ type MenusIdCategoriesIdArticleGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/articles/create_article_controller.ts').default['render'], false>
 }
+type MenusIdArticlesIdGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/articles/edit_article_controller.ts').default['render'], false>
+}
+type MenusIdArticlesIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_controller.ts').default['handle'], false>
+}
 type ArticlesPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/articles/create_article_controller.ts').default['handle'], true>
@@ -130,10 +138,6 @@ type ArticlesIdPut = {
 type ArticlesMenusIdOrderPatch = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/article.ts')['articleOrderValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/articles/update_article_order_controller.ts').default['handle'], true>
-}
-type ArticlesIdDelete = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_controller.ts').default['handle'], false>
 }
 type ArticlesIdImageDelete = {
   request: unknown
@@ -277,6 +281,15 @@ export interface ApiDefinition {
           };
         };
       };
+      'articles': {
+        ':id': {
+          '$url': {
+          };
+          '$get': MenusIdArticlesIdGetHead;
+          '$head': MenusIdArticlesIdGetHead;
+          '$delete': MenusIdArticlesIdDelete;
+        };
+      };
     };
   };
   'categories': {
@@ -309,7 +322,6 @@ export interface ApiDefinition {
       '$url': {
       };
       '$put': ArticlesIdPut;
-      '$delete': ArticlesIdDelete;
       'image': {
         '$url': {
         };
@@ -589,6 +601,20 @@ const routes = [
     types: {} as MenusIdCategoriesIdArticleGetHead,
   },
   {
+    params: ["menuId","id"],
+    name: 'articles.edit.render',
+    path: '/menus/:menuId/articles/:id',
+    method: ["GET","HEAD"],
+    types: {} as MenusIdArticlesIdGetHead,
+  },
+  {
+    params: ["menuId","id"],
+    name: 'articles.delete.handle',
+    path: '/menus/:menuId/articles/:id',
+    method: ["DELETE"],
+    types: {} as MenusIdArticlesIdDelete,
+  },
+  {
     params: [],
     name: 'articles.create.handle',
     path: '/articles',
@@ -608,13 +634,6 @@ const routes = [
     path: '/articles/menus/:menuId/order',
     method: ["PATCH"],
     types: {} as ArticlesMenusIdOrderPatch,
-  },
-  {
-    params: ["id"],
-    name: 'articles.delete.handle',
-    path: '/articles/:id',
-    method: ["DELETE"],
-    types: {} as ArticlesIdDelete,
   },
   {
     params: ["id"],

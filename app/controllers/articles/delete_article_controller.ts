@@ -9,6 +9,8 @@ export default class DeleteArticleController {
     })
     session.flash('success', 'Article deleted from menu')
 
-    return response.redirect().back()
+    return response.redirect().toRoute('menus.show.render', {
+      id: params.menuId,
+    })
   }
 }

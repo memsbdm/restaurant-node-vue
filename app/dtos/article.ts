@@ -2,6 +2,7 @@ import { BaseModelDto } from '@adocasts.com/dto/base'
 import Article from '#models/article'
 import CategoryDto from '#dtos/category'
 import RestaurantDto from './restaurant.js'
+import OptionCategoryDto from './option_category.js'
 
 export default class ArticleDto extends BaseModelDto {
   declare id: string
@@ -15,6 +16,7 @@ export default class ArticleDto extends BaseModelDto {
 
   declare restaurantId: string
   declare restaurant: RestaurantDto | null
+  declare optionCategories: OptionCategoryDto[] | null
 
   constructor(article?: Article) {
     super()
@@ -31,5 +33,7 @@ export default class ArticleDto extends BaseModelDto {
 
     this.restaurantId = article.restaurantId
     this.restaurant = article.restaurant && new RestaurantDto(article.restaurant)
+    this.optionCategories =
+      article.optionCategories && OptionCategoryDto.fromArray(article.optionCategories)
   }
 }

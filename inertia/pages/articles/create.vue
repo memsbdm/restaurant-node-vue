@@ -23,7 +23,6 @@ const form = useForm({
 
 const fileInput = ref()
 const image = ref()
-const showDeleteAlert = ref(false)
 
 function onFileChange(file: File) {
   image.value = URL.createObjectURL(file)
@@ -31,16 +30,13 @@ function onFileChange(file: File) {
 }
 
 function onDeleteImage() {
-  if (image.value) {
-    image.value = undefined
+  image.value = undefined
+  form.image = undefined
 
-    if (fileInput.value && fileInput.value.$el) {
-      fileInput.value.$el.value = ''
-    } else if (fileInput.value) {
-      fileInput.value.value = ''
-    }
-  } else {
-    showDeleteAlert.value = true
+  if (fileInput.value && fileInput.value.$el) {
+    fileInput.value.$el.value = ''
+  } else if (fileInput.value) {
+    fileInput.value.value = ''
   }
 }
 
@@ -107,7 +103,7 @@ function onSubmit(hasOptions: boolean) {
             </span>
           </div>
 
-          <div v-if="image" class="">
+          <div v-if="image">
             <Label for="image">Preview</Label>
 
             <div class="w-full relative">
