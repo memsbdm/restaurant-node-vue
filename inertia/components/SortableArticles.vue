@@ -2,7 +2,7 @@
 import ArticleDto from '#dtos/article'
 import CategoryDto from '#dtos/category'
 import type MenuDto from '#dtos/menu'
-import { GripVertical, Plus, Trash2 } from 'lucide-vue-next'
+import { Edit, GripVertical, Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { computed } from 'vue'
 import Sortable from 'vuedraggable'
@@ -38,14 +38,8 @@ const showDeleteAlert = ref(false)
   >
     <template #item="{ element: article }">
       <li
-        class="flex flex-col rounded-md px-3 py-1 hover:bg-slate-50 duration-300 group relative min-h-[90px] justify-between border cursor-pointer"
+        class="handle cursor-move flex flex-col rounded-md px-3 py-1 hover:bg-slate-50 duration-300 group relative min-h-[90px] justify-between border"
       >
-        <div
-          class="text-slate-400 hover:text-slate-950 handle cursor-move opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 -translate-y-1/2 right-full pl-2"
-        >
-          <GripVertical class="w-4 h-4" />
-        </div>
-
         <span class="font-medium mt-1">{{ article.name }}</span>
         <span v-if="!article.imageUrl" class="text-orange-400 text-xs items-center gap-2">
           Missing image
@@ -54,7 +48,21 @@ const showDeleteAlert = ref(false)
         <div class="flex justify-between items-center">
           <span class="text-sm">{{ (article.priceInCents / 100).toFixed(2) }} AED</span>
 
-          <div class="opacity-0 group-hover:opacity-100 duration-300 ml-2">
+          <div class="flex opacity-0 group-hover:opacity-100 duration-300 ml-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              @click="
+                router.get(
+                  tuyau.$url('articles.edit.render', {
+                    params: { id: article.id, menuId: menu.id },
+                  })
+                )
+              "
+            >
+              <Pencil />
+            </Button>
+
             <Button
               variant="ghost"
               size="icon"

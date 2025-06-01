@@ -72,14 +72,9 @@ function onArticleOrderChange() {
     <template #item="{ element: category, index }">
       <li class="flex flex-col border-b border-slate-200 pb-2 mb-2">
         <div
-          class="flex items-center justify-between rounded-md p-2 hover:bg-slate-50 duration-300 group relative mb-4 mt-2"
+          class="handle cursor-move flex items-center justify-between rounded-md p-2 hover:bg-slate-50 duration-300 group relative mb-4 mt-2"
         >
           <div class="flex items-center gap-4">
-            <div
-              class="text-slate-400 hover:text-slate-950 handle cursor-move opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 -translate-y-1/2 right-full pl-2"
-            >
-              <GripVertical class="w-4 h-4" />
-            </div>
             <span class="font-bold text-lg">{{ category.name }}</span>
 
             <span v-if="!category.description" class="text-orange-400 text-xs items-center gap-2">

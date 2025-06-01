@@ -21,15 +21,18 @@ export default class CreateArticleController {
       withRestaurantMetaData(restaurant.id)
     )
 
-    await CreateArticle.handle({
+    const createdArticle = await CreateArticle.handle({
       restaurant,
       data,
     })
 
     session.flash('success', 'Article created')
 
-    // TODO: redirect to edit page of the article
     if (data.hasOptions) {
+      return response.redirect().toRoute('articles.edit.render', {
+        id: createdArticle.id,
+        menuId: data.menuId,
+      })
     }
 
     return response.redirect().toRoute('menus.show.render', { id: data.menuId })
