@@ -6,20 +6,21 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class EditArticleController {
   async render({ params, restaurant, inertia }: HttpContext) {
-    const article = await GetArticle.handle({
-      restaurant,
-      id: params.id,
-    })
-
-    const { categories } = await GetMenu.handle({
-      id: params.menuId,
-      restaurant,
-    })
-
-    // TODO: async with inertia
     return inertia.render('articles/edit', {
-      article: new ArticleDto(article),
-      categories: CategoryDto.fromArray(categories),
+      article: async () => {
+        const article = await GetArticle.handle({
+          restaurant,
+          id: params.id,
+        })
+        return new ArticleDto(article)
+      },
+      categories: async () => {
+        const { categories } = await GetMenu.handle({
+          id: params.menuId,
+          restaurant,
+        })
+        return CategoryDto.fromArray(categories)
+      },
       menuId: params.menuId,
     })
   }
