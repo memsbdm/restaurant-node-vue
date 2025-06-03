@@ -143,6 +143,10 @@ type ArticlesIdImageDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/articles/delete_article_image_controller.ts').default['handle'], false>
 }
+type ArticlesIdOptioncategoriesPost = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/option_category.ts')['optionCategoryValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/option-categories/create_option_category_controller.ts').default['handle'], true>
+}
 type SettingsProfileGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['render'], false>
@@ -335,6 +339,13 @@ export interface ApiDefinition {
           };
           '$patch': ArticlesMenusIdOrderPatch;
         };
+      };
+    };
+    ':articleId': {
+      'option-categories': {
+        '$url': {
+        };
+        '$post': ArticlesIdOptioncategoriesPost;
       };
     };
   };
@@ -641,6 +652,13 @@ const routes = [
     path: '/articles/:id/image',
     method: ["DELETE"],
     types: {} as ArticlesIdImageDelete,
+  },
+  {
+    params: ["articleId"],
+    name: 'option-categories.create.handle',
+    path: '/articles/:articleId/option-categories',
+    method: ["POST"],
+    types: {} as ArticlesIdOptioncategoriesPost,
   },
   {
     params: [],

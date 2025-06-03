@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import type ArticleDto from '#dtos/article'
 import type CategoryDto from '#dtos/category'
+import type OptionCategoryTypeDto from '#dtos/option_category_type'
 import { router } from '@inertiajs/vue3'
 import { ArrowLeft, Trash2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import ConfirmDestroyDialog from '~/components/shared/ConfirmDestroyDialog.vue'
 import { useResourceActions } from '~/composables/resource_actions'
 import { tuyau } from '~/core/providers/tuyau'
+import SortableOptionCategories from '~/components/SortableOptionCategories.vue'
 
 const props = defineProps<{
   article: ArticleDto
   categories: CategoryDto[]
   menuId: string
+  optionCategoryTypes: OptionCategoryTypeDto[]
 }>()
 
 const { form, destroy } = useResourceActions<ArticleDto>()({
@@ -154,6 +157,12 @@ function onDestroy() {
         >
       </form>
     </div>
+
+    <SortableOptionCategories
+      v-model="article.optionCategories!"
+      :article-id="article.id"
+      :option-category-types="optionCategoryTypes"
+    />
   </div>
 
   <AlertDialog v-model:open="showDeleteAlert">

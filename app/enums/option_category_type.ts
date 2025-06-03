@@ -1,22 +1,22 @@
 export const OptionCategoryType = {
-  Select: 1,
-  Radio: 2,
+  Multiple: 1,
+  Unique: 2,
 } as const
 
 export type OptionCategoryTypeId = (typeof OptionCategoryType)[keyof typeof OptionCategoryType]
 
-export const RoleText = {
-  [OptionCategoryType.Select]: 'Select',
-  [OptionCategoryType.Radio]: 'Radio',
+export const OptionCategoryTypeText = {
+  [OptionCategoryType.Multiple]: 'Multiple',
+  [OptionCategoryType.Unique]: 'Unique',
 } as const
 
 export const rolesDbValues = [
   {
-    id: OptionCategoryType.Select,
-    name: RoleText[OptionCategoryType.Select],
+    id: OptionCategoryType.Multiple,
+    name: OptionCategoryTypeText[OptionCategoryType.Multiple],
   },
   {
-    id: OptionCategoryType.Radio,
-    name: RoleText[OptionCategoryType.Radio],
+    id: OptionCategoryType.Unique,
+    name: OptionCategoryTypeText[OptionCategoryType.Unique],
   },
 ]
