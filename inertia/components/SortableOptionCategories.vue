@@ -31,6 +31,11 @@ function onCreate() {
   dialog.value.open()
   nextTick(() => dialogFocusEl.value.inputEl.$el.focus())
 }
+
+function onEdit(resource: OptionCategoryDto) {
+  dialog.value.open(resource, { name: resource.name, typeId: resource.typeId })
+  nextTick(() => dialogFocusEl.value.inputEl.$el.focus())
+}
 </script>
 
 <template>
@@ -67,7 +72,7 @@ function onCreate() {
                   <EllipsisVertical class="w-4 h-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
+                  <DropdownMenuItem @click="onEdit(element)">Edit</DropdownMenuItem>
                   <DropdownMenuItem>Delete</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -94,6 +99,16 @@ function onCreate() {
             onSuccess,
             preserveScroll: true,
           }
+        )
+      "
+      @update="
+        form.put(
+          dialog.resource
+            ? tuyau.$url('option-categories.update.handle', {
+                params: { articleId: articleId, optionCategoryId: dialog.resource.id },
+              })
+            : '',
+          { onSuccess, preserveScroll: true }
         )
       "
     >

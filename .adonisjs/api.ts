@@ -147,6 +147,10 @@ type ArticlesIdOptioncategoriesPost = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/option_category.ts')['optionCategoryValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/option-categories/create_option_category_controller.ts').default['handle'], true>
 }
+type ArticlesIdOptioncategoriesIdPut = {
+  request: MakeTuyauRequest<InferInput<typeof import('../app/validators/option_category.ts')['optionCategoryValidator']>>
+  response: MakeTuyauResponse<import('../app/controllers/option-categories/update_option_category_controller.ts').default['handle'], true>
+}
 type SettingsProfileGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['render'], false>
@@ -346,6 +350,11 @@ export interface ApiDefinition {
         '$url': {
         };
         '$post': ArticlesIdOptioncategoriesPost;
+        ':optionCategoryId': {
+          '$url': {
+          };
+          '$put': ArticlesIdOptioncategoriesIdPut;
+        };
       };
     };
   };
@@ -659,6 +668,13 @@ const routes = [
     path: '/articles/:articleId/option-categories',
     method: ["POST"],
     types: {} as ArticlesIdOptioncategoriesPost,
+  },
+  {
+    params: ["articleId","optionCategoryId"],
+    name: 'option-categories.update.handle',
+    path: '/articles/:articleId/option-categories/:optionCategoryId',
+    method: ["PUT"],
+    types: {} as ArticlesIdOptioncategoriesIdPut,
   },
   {
     params: [],
