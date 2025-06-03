@@ -84,7 +84,7 @@ function onOptionCategoryOrderChange() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem @click="onEdit(element)">Edit</DropdownMenuItem>
-                  <DropdownMenuItem>Delete</DropdownMenuItem>
+                  <DropdownMenuItem @click="destroy.open(element)">Delete</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -137,5 +137,20 @@ function onOptionCategoryOrderChange() {
         </SelectItem>
       </FormInput>
     </FormDialog>
+
+    <ConfirmDestroyDialog
+      v-model:open="destroy.isOpen"
+      title="Delete Option Category?"
+      :action-href="
+        destroy.resource
+          ? tuyau.$url('option-categories.delete.handle', {
+              params: { articleId: articleId, optionCategoryId: destroy.resource.id },
+            })
+          : ''
+      "
+    >
+      Are you sure you'd like to delete your
+      <strong>{{ destroy.resource?.name }}</strong> option category?
+    </ConfirmDestroyDialog>
   </div>
 </template>

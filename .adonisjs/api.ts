@@ -155,6 +155,10 @@ type ArticlesIdOptioncategoriesOrderPatch = {
   request: MakeTuyauRequest<InferInput<typeof import('../app/validators/option_category.ts')['optionCategoryOrderValidator']>>
   response: MakeTuyauResponse<import('../app/controllers/option-categories/update_option_category_order_controller.ts').default['handle'], true>
 }
+type ArticlesIdOptioncategoriesIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/option-categories/delete_option_category_controller.ts').default['handle'], false>
+}
 type SettingsProfileGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/settings/update_profile_controller.ts').default['render'], false>
@@ -358,6 +362,7 @@ export interface ApiDefinition {
           '$url': {
           };
           '$put': ArticlesIdOptioncategoriesIdPut;
+          '$delete': ArticlesIdOptioncategoriesIdDelete;
         };
         'order': {
           '$url': {
@@ -691,6 +696,13 @@ const routes = [
     path: '/articles/:articleId/option-categories/order',
     method: ["PATCH"],
     types: {} as ArticlesIdOptioncategoriesOrderPatch,
+  },
+  {
+    params: ["articleId","optionCategoryId"],
+    name: 'option-categories.delete.handle',
+    path: '/articles/:articleId/option-categories/:optionCategoryId',
+    method: ["DELETE"],
+    types: {} as ArticlesIdOptioncategoriesIdDelete,
   },
   {
     params: [],
