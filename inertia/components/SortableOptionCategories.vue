@@ -7,6 +7,7 @@ import { EllipsisVertical, GripVertical, Plus } from 'lucide-vue-next'
 import { OptionCategoryTypeText } from '#enums/option_category_type'
 import { tuyau } from '~/core/providers/tuyau'
 import type OptionCategoryTypeDto from '#dtos/option_category_type'
+import { router } from '@inertiajs/vue3'
 
 const props = defineProps<{
   articleId: string
@@ -36,6 +37,15 @@ function onEdit(resource: OptionCategoryDto) {
   dialog.value.open(resource, { name: resource.name, typeId: resource.typeId })
   nextTick(() => dialogFocusEl.value.inputEl.$el.focus())
 }
+
+function onOptionCategoryOrderChange() {
+  const ids = optionCategories.value.map((category) => category.id)
+  router.patch(
+    tuyau.$url('option-categories.order.handle', { params: { articleId: props.articleId } }),
+    { ids },
+    { preserveScroll: true }
+  )
+}
 </script>
 
 <template>
@@ -48,6 +58,7 @@ function onEdit(resource: OptionCategoryDto) {
       tag="ul"
       group="option-categories"
       handle=".handle"
+      @end="onOptionCategoryOrderChange"
     >
       <template #item="{ element }: { element: OptionCategoryDto }">
         <li class="flex flex-col border-b border-slate-200 pb-2 mb-2">
