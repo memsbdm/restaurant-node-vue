@@ -25,6 +25,7 @@ export default class CreateOptionCategory {
       name: data.name,
       typeId: type.id,
       articleId: article.id,
+      maxSelectionCount: data.maxSelectionCount,
       order: await this.#findNextOrder(article),
     })
   }

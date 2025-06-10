@@ -11,6 +11,7 @@ export default class OptionCategoryDto extends BaseModelDto {
   declare typeId: OptionCategoryTypeId
   declare order: number
   declare articleId: string | null
+  declare maxSelectionCount?: number
 
   declare article: ArticleDto | null
   declare type: OptionCategoryTypeDto | null
@@ -25,6 +26,7 @@ export default class OptionCategoryDto extends BaseModelDto {
     this.typeId = optionCategory.typeId
     this.order = optionCategory.order
     this.articleId = optionCategory.articleId
+    this.maxSelectionCount = optionCategory.maxSelectionCount ?? undefined
 
     this.article = optionCategory.article && new ArticleDto(optionCategory.article)
     this.type = optionCategory.type && new OptionCategoryTypeDto(optionCategory.type)

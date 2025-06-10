@@ -4,6 +4,7 @@ export const optionCategoryValidator = vine.compile(
   vine.object({
     name: vine.string().maxLength(50),
     typeId: vine.number(),
+    maxSelectionCount: vine.number().max(10).optional(),
   })
 )
 

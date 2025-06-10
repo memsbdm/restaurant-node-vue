@@ -14,6 +14,7 @@ export default class extends BaseSchema {
         .notNullable()
       table.integer('order').unsigned().notNullable().defaultTo(0)
       table.bigint('article_id').references('articles.id').onDelete('CASCADE').notNullable()
+      table.integer('max_selection_count').unsigned().nullable()
     })
   }
 

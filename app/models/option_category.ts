@@ -21,6 +21,9 @@ export default class OptionCategory extends BaseModel {
   @column()
   declare articleId: string
 
+  @column()
+  declare maxSelectionCount?: number | null
+
   @belongsTo(() => OptionCategoryType)
   declare type: BelongsTo<typeof OptionCategoryType>
 

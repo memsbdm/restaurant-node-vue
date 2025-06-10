@@ -33,6 +33,7 @@ export default class UpdateOptionCategory {
       .merge({
         name: data.name,
         typeId: type.id,
+        maxSelectionCount: data.maxSelectionCount ?? null,
       })
       .save()
   }

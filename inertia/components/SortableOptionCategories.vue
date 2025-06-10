@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type OptionCategoryDto from '#dtos/option_category'
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref, watchEffect } from 'vue'
 import { useResourceActions } from '~/composables/resource_actions'
 import Sortable from 'vuedraggable'
 import { EllipsisVertical, GripVertical, Plus } from 'lucide-vue-next'
-import { OptionCategoryTypeText } from '#enums/option_category_type'
+import { OptionCategoryType, OptionCategoryTypeText } from '#enums/option_category_type'
 import { tuyau } from '~/core/providers/tuyau'
 import type OptionCategoryTypeDto from '#dtos/option_category_type'
 import { router } from '@inertiajs/vue3'
@@ -26,6 +26,13 @@ const optionCategories = computed({
 const { form, dialog, destroy, onSuccess } = useResourceActions<OptionCategoryDto>()({
   name: '',
   typeId: props.optionCategoryTypes[0].id,
+  maxSelectionCount: undefined as number | undefined,
+})
+
+watchEffect(() => {
+  if (form.typeId !== OptionCategoryType.Multiple) {
+    form.maxSelectionCount = undefined
+  }
 })
 
 function onCreate() {
@@ -34,7 +41,11 @@ function onCreate() {
 }
 
 function onEdit(resource: OptionCategoryDto) {
-  dialog.value.open(resource, { name: resource.name, typeId: resource.typeId })
+  dialog.value.open(resource, {
+    name: resource.name,
+    typeId: resource.typeId,
+    maxSelectionCount: resource.maxSelectionCount,
+  })
   nextTick(() => dialogFocusEl.value.inputEl.$el.focus())
 }
 
@@ -136,6 +147,15 @@ function onOptionCategoryOrderChange() {
           {{ type.name }}
         </SelectItem>
       </FormInput>
+
+      <FormInput
+        v-if="form.typeId === OptionCategoryType.Multiple"
+        type="number"
+        v-model="form.maxSelectionCount"
+        label="Max Selection Count"
+        :error="form.errors.maxSelectionCount"
+        min="0"
+      />
     </FormDialog>
 
     <ConfirmDestroyDialog

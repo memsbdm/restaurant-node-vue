@@ -10,7 +10,7 @@ export const OptionCategoryTypeText = {
   [OptionCategoryType.Unique]: 'Unique',
 } as const
 
-export const rolesDbValues = [
+export const optionCategoryTypesDbValues = [
   {
     id: OptionCategoryType.Multiple,
     name: OptionCategoryTypeText[OptionCategoryType.Multiple],
