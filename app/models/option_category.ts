@@ -4,8 +4,10 @@ import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Option from './option.js'
 import Article from './article.js'
 import OptionCategoryType from './option_category_type.js'
+import { compose } from '@adonisjs/core/helpers'
+import { WithRestaurant } from './mixins/with_restaurant.js'
 
-export default class OptionCategory extends BaseModel {
+export default class OptionCategory extends compose(BaseModel, WithRestaurant) {
   @column({ isPrimary: true })
   declare id: string
 

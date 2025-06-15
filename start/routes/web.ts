@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
+const CreateOptionController = () => import('#controllers/options/create_option_controller')
 const DeleteOptionCategoryController = () =>
   import('#controllers/option-categories/delete_option_category_controller')
 const UpdateOptionCategoryOrderController = () =>
@@ -208,6 +209,12 @@ router
   ])
   .use([middleware.auth(), middleware.restaurant()])
   .as('option-categories.delete.handle')
+
+// Options
+router
+  .post('/option-categories/:optionCategoryId/options', [CreateOptionController, 'handle'])
+  .use([middleware.auth(), middleware.restaurant()])
+  .as('options.create.handle')
 
 // Settings (Profile)
 router

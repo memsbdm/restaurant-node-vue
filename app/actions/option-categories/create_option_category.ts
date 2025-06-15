@@ -27,6 +27,7 @@ export default class CreateOptionCategory {
       articleId: article.id,
       maxSelectionCount: data.maxSelectionCount,
       order: await this.#findNextOrder(article),
+      restaurantId: restaurant.id,
     })
   }
 

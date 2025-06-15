@@ -6,6 +6,8 @@ import User from './user.js'
 import Menu from './menu.js'
 import Category from './category.js'
 import Article from './article.js'
+import OptionCategory from './option_category.js'
+import Option from './option.js'
 
 export default class Restaurant extends BaseModel {
   @column({ isPrimary: true })
@@ -61,6 +63,12 @@ export default class Restaurant extends BaseModel {
 
   @hasMany(() => Article)
   declare articles: HasMany<typeof Article>
+
+  @hasMany(() => OptionCategory)
+  declare optionCategories: HasMany<typeof OptionCategory>
+
+  @hasMany(() => Option)
+  declare options: HasMany<typeof Option>
 
   @hasMany(() => RestaurantInvite)
   declare invites: HasMany<typeof RestaurantInvite>

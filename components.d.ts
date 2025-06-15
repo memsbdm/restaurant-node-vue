@@ -101,6 +101,7 @@ declare module 'vue' {
     SortableArticles: typeof import('./inertia/components/SortableArticles.vue')['default']
     SortableCategories: typeof import('./inertia/components/SortableCategories.vue')['default']
     SortableOptionCategories: typeof import('./inertia/components/SortableOptionCategories.vue')['default']
+    SortableOptions: typeof import('./inertia/components/SortableOptions.vue')['default']
     Switch: typeof import('./inertia/components/ui/switch/Switch.vue')['default']
     Table: typeof import('./inertia/components/ui/table/Table.vue')['default']
     TableBody: typeof import('./inertia/components/ui/table/TableBody.vue')['default']

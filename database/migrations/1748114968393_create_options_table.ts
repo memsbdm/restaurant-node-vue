@@ -14,6 +14,11 @@ export default class extends BaseSchema {
         .references('option_categories.id')
         .onDelete('CASCADE')
         .notNullable()
+      table
+        .bigInteger('restaurant_id')
+        .references('restaurants.id')
+        .onDelete('CASCADE')
+        .notNullable()
     })
   }
 

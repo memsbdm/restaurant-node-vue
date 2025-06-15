@@ -2,7 +2,7 @@
 import ArticleDto from '#dtos/article'
 import CategoryDto from '#dtos/category'
 import type MenuDto from '#dtos/menu'
-import { Edit, GripVertical, Pencil, Plus, Trash2 } from 'lucide-vue-next'
+import { Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { computed } from 'vue'
 import Sortable from 'vuedraggable'

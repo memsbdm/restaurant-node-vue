@@ -100,13 +100,14 @@ function onOptionCategoryOrderChange() {
               </DropdownMenu>
             </div>
           </div>
+          <SortableOptions :article-id="articleId" :model-value="element" />
         </li>
       </template>
     </Sortable>
 
     <Button variant="ghost" size="sm" class="flex gap-2" @click="onCreate">
       <Plus class="w-4 h-4" />
-      Add Category
+      Add Option Category
     </Button>
 
     <FormDialog

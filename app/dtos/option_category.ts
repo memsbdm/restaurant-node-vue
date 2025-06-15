@@ -4,6 +4,7 @@ import type { OptionCategoryTypeId } from '#enums/option_category_type'
 import OptionCategoryTypeDto from './option_category_type.js'
 import type OptionCategory from '#models/option_category'
 import OptionDto from './option.js'
+import RestaurantDto from './restaurant.js'
 
 export default class OptionCategoryDto extends BaseModelDto {
   declare id: string
@@ -15,7 +16,9 @@ export default class OptionCategoryDto extends BaseModelDto {
 
   declare article: ArticleDto | null
   declare type: OptionCategoryTypeDto | null
-  declare options: OptionDto[] | null
+  declare options: OptionDto[]
+  declare restaurantId: string
+  declare restaurant: RestaurantDto | null
 
   constructor(optionCategory?: OptionCategory) {
     super()
@@ -31,5 +34,8 @@ export default class OptionCategoryDto extends BaseModelDto {
     this.article = optionCategory.article && new ArticleDto(optionCategory.article)
     this.type = optionCategory.type && new OptionCategoryTypeDto(optionCategory.type)
     this.options = optionCategory.options && OptionDto.fromArray(optionCategory.options)
+
+    this.restaurantId = optionCategory.restaurantId
+    this.restaurant = optionCategory.restaurant && new RestaurantDto(optionCategory.restaurant)
   }
 }

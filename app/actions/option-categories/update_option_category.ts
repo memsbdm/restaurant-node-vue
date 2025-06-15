@@ -34,6 +34,7 @@ export default class UpdateOptionCategory {
         name: data.name,
         typeId: type.id,
         maxSelectionCount: data.maxSelectionCount ?? null,
+        restaurantId: restaurant.id,
       })
       .save()
   }

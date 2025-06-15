@@ -2,7 +2,7 @@
 import { router } from '@inertiajs/vue3'
 import CategoryDto from '#dtos/category'
 import type MenuDto from '#dtos/menu'
-import { GripVertical, Pencil, Plus, Trash2 } from 'lucide-vue-next'
+import { Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { nextTick } from 'vue'
 import { ref } from 'vue'
 import { computed } from 'vue'

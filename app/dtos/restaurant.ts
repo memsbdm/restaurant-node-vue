@@ -4,6 +4,8 @@ import MenuDto from '#dtos/menu'
 import CategoryDto from '#dtos/category'
 import ArticleDto from '#dtos/article'
 import RestaurantInviteDto from '#dtos/restaurant_invite'
+import OptionCategoryDto from './option_category.js'
+import OptionDto from './option.js'
 
 export default class RestaurantDto extends BaseModelDto {
   declare id: string
@@ -24,6 +26,8 @@ export default class RestaurantDto extends BaseModelDto {
   declare menus: MenuDto[]
   declare categories: CategoryDto[]
   declare articles: ArticleDto[]
+  declare optionCategories: OptionCategoryDto[]
+  declare options: OptionDto[]
   declare invites: RestaurantInviteDto[]
 
   constructor(restaurant?: Restaurant) {
@@ -48,6 +52,8 @@ export default class RestaurantDto extends BaseModelDto {
     this.menus = MenuDto.fromArray(restaurant.menus)
     this.categories = CategoryDto.fromArray(restaurant.categories)
     this.articles = ArticleDto.fromArray(restaurant.articles)
+    this.optionCategories = OptionCategoryDto.fromArray(restaurant.optionCategories)
+    this.options = OptionDto.fromArray(restaurant.options)
     this.invites = RestaurantInviteDto.fromArray(restaurant.invites)
   }
 }
